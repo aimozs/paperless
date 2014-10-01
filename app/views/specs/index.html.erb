@@ -14,14 +14,14 @@
   </thead>
 
   <tbody>
-    <% @specs.each do |spec| %>
+    <% @specs.reverse_order.each do |spec| %>
       <tr>
         <td><%= spec.time %></td>
         <td><%= spec.serie %></td>
         <td><%= spec.rep %></td>
         <td><%= spec.tempo %></td>
-        <td><%= spec.programme %></td>
-        <td><%= spec.exercise %></td>
+        <td><%= spec.programme.description %></td>
+        <td><%= spec.exercise.name %></td>
         <td><%= link_to 'Show', spec %></td>
         <td><%= link_to 'Edit', edit_spec_path(spec) %></td>
         <td><%= link_to 'Destroy', spec, method: :delete, data: { confirm: 'Are you sure?' } %></td>

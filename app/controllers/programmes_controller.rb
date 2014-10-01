@@ -17,6 +17,7 @@ class ProgrammesController < ApplicationController
   # GET /programmes/new
   def new
     @programme = Programme.new
+    @exercises = Exercise.all
   end
 
   # GET /programmes/1/edit
@@ -31,7 +32,7 @@ class ProgrammesController < ApplicationController
 
     respond_to do |format|
       if @programme.save
-        format.html { redirect_to @programme, notice: 'Programme was successfully created.' }
+        format.html { redirect_to new_spec_path(programme: @programme.id), notice: 'Programme was successfully created.' }
         format.json { render :show, status: :created, location: @programme }
       else
         format.html { render :new }
@@ -72,6 +73,6 @@ class ProgrammesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def programme_params
-      params.require(:programme).permit(:description, :due_date, :user_id, exercises_attributes:[:id, :name, :_destroy], specs_attributes:[:programme_id, :exercise_id, :time, :serie, :rep, :tempo, :_destroy])
+      params.require(:programme).permit(:description, :due_date, :user_id, specs_attributes:[:programme_id, :exercise_id, :time, :serie, :rep, :tempo, :_destroy])
     end
 end

@@ -11,16 +11,23 @@
 	</p>
 	<p>
 	  <strong>User:</strong>
-	  <%= @programme.user %>
+	  <%= @programme.user.email %>
 	</p>
 	</div>
 
 	<div class="col-md-4">
-	<% @exercises.each do |exercise| %>
-        
-          <li><%= exercise.name %></li>
-        
-      <% end %>
+
+	<%= link_to 'Add another exercise', new_spec_path(programme: @programme.id), class:'btn btn-warning'%>
+		<% @exercises.reverse_order.each do |exercise| %>
+	        
+	          <li><%= exercise.name %>
+	          	Time: <%= exercise.specs.where('programme_id = ?', @programme.id).first.time %>
+	          	<br>
+	          	<%= exercise.specs.where('programme_id = ?', @programme.id).first.serie %> Series
+	          	of <%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %> reps 
+	          	at tempo <%= exercise.specs.where('programme_id = ?', @programme.id).first.tempo %>
+	          </li>
+	     <% end %>
     </div>
 </div>
 <%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-warning' %> |

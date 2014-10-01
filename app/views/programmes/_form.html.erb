@@ -1,37 +1,17 @@
-
-<%= simple_nested_form_for(@programme) do |f| %>
-  <%= f.error_notification %>
 <div class="row">
   <div class="col-md-4 col-xs-12">
-  	<div class="form-group">
-    	<%= f.input :description, input_html: { class: 'form-control' } %>
-  	</div>
-  	<div class="form-group">
-    	<%= f.input :due_date, input_html: { class: 'form-control' } %>
-  	</div>
-
-  </div>
-  <div class="col-md-4 col-xs-12">
-    <%= f.fields_for :exercises do |exercise_form| %>
-      <%= exercise_form.input :name %>
-      <%= exercise_form.input :description %>
-      <%= exercise_form.input :link %>
-      <%= exercise_form.link_to_remove "Remove this exercise" %>
+    <%= simple_form_for(@programme) do |f| %>
+    <%= f.error_notification %>
+      <%= f.collection_select :user_id, User.all, :id, :email, include_blank: true %>
+    	<div class="form-group">
+      	<%= f.input :description, input_html: { class: 'form-control' } %>
+    	</div>
+    	<div class="form-group">
+      	<%= f.input :due_date, input_html: { class: 'form-control' } %>
+    	</div>
+      <div class="form-group">
+        <%= f.submit 'Submit', class: 'btn btn-danger' %>
+      </div>
     <% end %>
-    <p><%= f.link_to_add "Add a exercise", :exercises, class:'btn btn-warning' %></p>
-  </div>
-  <div class="col-md-4 col-xs-12">
-    <%= f.fields_for :specs do |spec_form| %>
-      <%= spec_form.input :time %>
-      <%= spec_form.input :serie %>
-      <%= spec_form.input :rep %>
-      <%= spec_form.input :tempo %>
-      <%= spec_form.link_to_remove "Remove this spec" %>
-    <% end %>
-    <p><%= f.link_to_add "Add a spec", :specs, class:'btn btn-warning' %></p>
   </div>
 </div>
-  <div class="form-group">
-    <%= f.submit 'Submit', class: 'btn btn-danger' %>
-  </div>
-<% end %>

@@ -14,6 +14,11 @@ class SpecsController < ApplicationController
 
   # GET /specs/new
   def new
+    if params[:programme]
+      @programme_id = params[:programme]
+    else
+      redirect_to :back
+    end
     @spec = Spec.new
   end
 
