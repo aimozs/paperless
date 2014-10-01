@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+	<div class="col-md-4">
+	<p>
+	  <strong>Description:</strong>
+	  <%= @programme.description %>
+	</p>
+	<p>
+	  <strong>Due date:</strong>
+	  <%= @programme.due_date %>
+	</p>
+	<p>
+	  <strong>User:</strong>
+	  <%= @programme.user %>
+	</p>
+	</div>
+
+	<div class="col-md-4">
+	<% @exercises.each do |exercise| %>
+        
+          <li><%= exercise.name %></li>
+        
+      <% end %>
+    </div>
+</div>
+<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-warning' %> |
+<%= link_to 'Back', programmes_path, class:'btn btn-success' %>

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930062424) do
+ActiveRecord::Schema.define(version: 20141001004202) do
+
+  create_table "exercises", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "profiles", force: true do |t|
     t.string   "first_name"
@@ -27,6 +35,16 @@ ActiveRecord::Schema.define(version: 20140930062424) do
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
+  create_table "programmes", force: true do |t|
+    t.text     "description"
+    t.date     "due_date"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -37,6 +55,20 @@ ActiveRecord::Schema.define(version: 20140930062424) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "specs", force: true do |t|
+    t.time     "time"
+    t.integer  "serie"
+    t.integer  "rep"
+    t.string   "tempo"
+    t.integer  "programme_id"
+    t.integer  "exercise_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "specs", ["exercise_id"], name: "index_specs_on_exercise_id"
+  add_index "specs", ["programme_id"], name: "index_specs_on_programme_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

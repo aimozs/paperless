@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time: 2014-10-01 10:42:02
+  serie: 1
+  rep: 1
+  tempo: MyString
+  programme_id: 
+  exercise_id: 
+
+two:
+  time: 2014-10-01 10:42:02
+  serie: 1
+  rep: 1
+  tempo: MyString
+  programme_id: 
+  exercise_id: 
