@@ -1,0 +1,35 @@
+<h1>Listing specs</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Serie</th>
+      <th>Rep</th>
+      <th>Tempo</th>
+      <th>Programme</th>
+      <th>Exercise</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @specs.each do |spec| %>
+      <tr>
+        <td><%= spec.time %></td>
+        <td><%= spec.serie %></td>
+        <td><%= spec.rep %></td>
+        <td><%= spec.tempo %></td>
+        <td><%= spec.programme %></td>
+        <td><%= spec.exercise %></td>
+        <td><%= link_to 'Show', spec %></td>
+        <td><%= link_to 'Edit', edit_spec_path(spec) %></td>
+        <td><%= link_to 'Destroy', spec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Spec', new_spec_path %>
