@@ -1,14 +1,12 @@
 
+<h2><%= link_to 'Back to programmes', programmes_path, class:'btn btn-primary' %></h2>
+<hr>
 <div class="row">
 	<div class="col-md-6">
-		<h1>New programme for: </h1>
-	</div>
-	
-	<div class="col-md-6">
-		<h2><%= link_to 'Create a new exercise', new_exercise_path, class:'btn btn-warning' %></h2>	
+		<h2>New programme for:</h2>
 	</div>
 </div>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', programmes_path %>
+

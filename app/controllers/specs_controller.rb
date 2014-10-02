@@ -1,5 +1,6 @@
 class SpecsController < ApplicationController
   before_action :set_spec, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /specs
   # GET /specs.json
@@ -33,7 +34,7 @@ class SpecsController < ApplicationController
 
     respond_to do |format|
       if @spec.save
-        format.html { redirect_to @spec, notice: 'Spec was successfully created.' }
+        format.html { redirect_to :back, notice: 'Spec was successfully created.' }
         format.json { render :show, status: :created, location: @spec }
       else
         format.html { render :new }

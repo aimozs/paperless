@@ -8,7 +8,7 @@
     	<%= f.input :last_name, input_html: { class: 'form-control' } %>
   	</div>
   	<div class="form-group">
-    	<%= f.input :dob, input_html: { class: 'form-control' } %>
+    	<%= f.input :dob, start_year: Date.today.year - 60, end_year: Date.today.year - 6, input_html: { class: 'form-control' } %>
   	</div>
   	<div class="form-group">
     	<%= f.input :height, input_html: { class: 'form-control' } %>

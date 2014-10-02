@@ -5,7 +5,7 @@ class ProgrammesController < ApplicationController
   # GET /programmes.json
   def index
     @programmes = Programme.all
-
+    @users = User.all
   end
 
   # GET /programmes/1

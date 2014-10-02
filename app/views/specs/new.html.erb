@@ -1,5 +1,14 @@
-<h1>New spec</h1>
+<div class="row">
+	<div class="col-md-6">
+	
+	<h2><%= link_to 'Back to programme', programme_path(@programme_id), class:'btn btn-success' %><%= link_to 'Create a new exercise', new_exercise_path, class:'btn btn-warning' %></h2>	
+	
+	<hr>
+	<h1>New spec</h1>
+	</div>
+</div>
 
 <%= render 'form' %>
 
 <%= link_to 'Back', specs_path %>
+

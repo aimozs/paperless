@@ -1,18 +1,14 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
 	<div class="col-md-4">
+	<h2><%= link_to 'Back to programmes', programmes_path, class:'btn btn-primary' %></h2>
+	<hr>
+	<h4><strong>Client: </strong><%= @programme.user.email %></h4>
+	<h5><%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %><strong> Due date: </strong><%= @programme.due_date %></h5>
 	<p>
-	  <strong>Description:</strong>
 	  <%= @programme.description %>
 	</p>
-	<p>
-	  <strong>Due date:</strong>
-	  <%= @programme.due_date %>
-	</p>
-	<p>
-	  <strong>User:</strong>
-	  <%= @programme.user.email %>
-	</p>
+	
 	</div>
 
 	<div class="col-md-4">
@@ -30,5 +26,4 @@
 	     <% end %>
     </div>
 </div>
-<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-warning' %> |
-<%= link_to 'Back', programmes_path, class:'btn btn-success' %>
+

@@ -1,6 +1,15 @@
-<h1>Listing programmes</h1>
+<h1>Choose a client:</h1>
+
+<% @users.each do |user| %>
+  <ul>
+    <li><%= link_to user.email, profile_path(user.id) %></li>
+  </ul>
+<% end %>
+<hr>
+
+<h1>List of programmes</h1>
 <br>
-<%= link_to 'New Programme', new_programme_path, class:'btn btn-success' %>
+<%= link_to 'New programme', new_programme_path, class:'btn btn-success' %>
 <br>
 <table class="table table-hover">
   <thead>

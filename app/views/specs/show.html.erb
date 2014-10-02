@@ -22,12 +22,12 @@
 
 <p>
   <strong>Programme:</strong>
-  <%= @spec.programme %>
+  <%= @spec.programme.id %>
 </p>
 
 <p>
   <strong>Exercise:</strong>
-  <%= @spec.exercise %>
+  <%= @spec.exercise.name %>
 </p>
 
 <%= link_to 'Edit', edit_spec_path(@spec) %> |

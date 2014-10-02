@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= link_to 'Back to programmes', programmes_path, class:'btn btn-primary' %></h2>
+<% if current_user == @profile.user %>
+  <h2><%= link_to 'Edit', edit_profile_path(@profile), class:'btn btn-default' %></h2>
+<% end %>
 <p>
   <strong>First name:</strong>
   <%= @profile.first_name %>
@@ -32,8 +36,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @profile.user %>
+  <%= @profile.user.email %>
 </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+
