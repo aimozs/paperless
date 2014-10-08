@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Time</th>
       <th>Serie</th>
       <th>Rep</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @specs.reverse_order.each do |spec| %>
       <tr>
+        <td><%= spec.id %></td>
         <td><%= spec.time %></td>
         <td><%= spec.serie %></td>
         <td><%= spec.rep %></td>

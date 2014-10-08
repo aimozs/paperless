@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
-  resources :specs
+  resources :specs do
+    member do
+      get :remove
+    end
+  end
 
   resources :exercises
 
   resources :programmes
 
-  resources :profiles
+  resources :profiles do
+    member do
+      get :promote
+      get :downgrade
+    end
+  end
 
   devise_for :users
   # get 'home/index'

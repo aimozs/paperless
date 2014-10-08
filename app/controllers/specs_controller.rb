@@ -1,5 +1,5 @@
 class SpecsController < ApplicationController
-  before_action :set_spec, only: [:show, :edit, :update, :destroy]
+  before_action :set_spec, only: [:remove, :show, :edit, :update, :destroy]
   
 
   # GET /specs
@@ -11,6 +11,11 @@ class SpecsController < ApplicationController
   # GET /specs/1
   # GET /specs/1.json
   def show
+  end
+
+  def remove
+    @spec.delete
+    redirect_to :back
   end
 
   # GET /specs/new
@@ -48,7 +53,7 @@ class SpecsController < ApplicationController
   def update
     respond_to do |format|
       if @spec.update(spec_params)
-        format.html { redirect_to @spec, notice: 'Spec was successfully updated.' }
+        format.html { redirect_to @spec.programme, notice: 'Spec was successfully updated.' }
         format.json { render :show, status: :ok, location: @spec }
       else
         format.html { render :edit }

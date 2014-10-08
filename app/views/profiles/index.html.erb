@@ -3,35 +3,25 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>ID</th>
       <th>First name</th>
-      <th>Last name</th>
-      <th>Dob</th>
-      <th>Height</th>
-      <th>Weight</th>
-      <th>Link</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>Email</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @profiles.each do |profile| %>
-      <tr>
-        <td><%= profile.first_name %></td>
-        <td><%= profile.last_name %></td>
-        <td><%= profile.dob %></td>
-        <td><%= profile.height %></td>
-        <td><%= profile.weight %></td>
-        <td><%= profile.link %></td>
+    <% @profiles.reverse_order.each do |profile| %>
+      <% if profile.user.has_role? :admin %>
+        <tr class="warning">
+      <% elsif profile.user.has_role? :trainer %>
+        <tr class="info">
+      <% else %>
+      <tr class="danger">
+      <% end %>
+        <td><%= profile.id %></td>
+        <td><%= link_to profile.first_name.capitalize, profile %></td>
         <td><%= profile.user.email %></td>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Profile', new_profile_path %>

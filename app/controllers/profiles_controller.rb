@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:downgrade, :promote, :show, :edit, :update, :destroy]
 
   # GET /profiles
   # GET /profiles.json
@@ -17,6 +17,16 @@ class ProfilesController < ApplicationController
     @profile = Profile.new
   end
 
+  def promote
+    @profile.user.add_role :trainer
+    redirect_to :back
+  end
+
+  def downgrade
+    @profile.user.remove_role :trainer
+    redirect_to :back
+  end
+
   # GET /profiles/1/edit
   def edit
   end
@@ -29,7 +39,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to programmes_path, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }

@@ -1,31 +1,59 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+    <% if user_signed_in? %>
+      <% if current_user.has_role? :admin %>
+        style="background-color: #ffd700;"
+        <% else %>
+          <% if current_user.has_role? :trainer %>
+            style="background-color: #c0c0c0;"
+          <% else %>
+            style="background-color: #de8f43;"
+          <% end %>
+      <% end %>
+    <% end %>
+    >
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+      <a class="navbar-brand" href="/">My Online PT</a>
+      <% if user_signed_in? %>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">My Online PT</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <% if user_signed_in? %>
-          <li><%= link_to 'Programmes', programmes_path %></li>
+    
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
           
-          <li><%= link_to 'Messages' %></li>
-          <% if current_user.profile %>
-            <li><%= link_to 'Profile', profile_path(current_user.profile) %></li>
-          <% end %>
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
-          <% else %>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <% end %>
-      </ul>
+            <!-- if the signed in user is admin, he can see a list of users -->
+            <% if current_user.has_role? :admin %>
+              <li><%= link_to 'Admin', profiles_path %></li>
+            <% end %>
+            <!-- if the signed in user is trainer, he can see a list of exercises -->
+            <% if current_user.has_role? :trainer %>
+              <li><%= link_to 'Exercices', exercises_path %></li>
+              <li><hr></li>
+            <% end %>
+
+            <li><%= link_to 'Programmes', programmes_path %></li>
+            <li><%= link_to 'Messages' %></li>
+            <% if current_user.profile %>
+              <li><%= link_to current_user.profile.first_name.capitalize + "'s Profile", profile_path(current_user.profile) %></li>
+            <% else %>
+              <li><%= link_to 'Profile', new_profile_path %></li>
+            <% end %>
+
+            <li><hr></li>
+            <li><%= link_to 'Sign out' , destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+      <% else %>
+      </div>
+      <% end %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
