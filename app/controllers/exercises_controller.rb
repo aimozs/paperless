@@ -1,15 +1,10 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:remove_exercise, :show, :edit, :update, :destroy]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
 
   # GET /exercises
   # GET /exercises.json
   def index
     @exercises = Exercise.all
-  end
-
-  def remove_exercise
-    @exercise.specs.delete(spec)
-    redirect_to :back
   end
 
   # GET /exercises/1
