@@ -1,4 +1,4 @@
-<h1>Listing profiles</h1>
+<h1>Listing of your clients</h1>
 
 <table class="table table-hover">
   <thead>
@@ -11,17 +11,44 @@
 
   <tbody>
     <% @profiles.reverse_order.each do |profile| %>
-      <% if profile.user.has_role? :admin %>
-        <tr class="warning">
-      <% elsif profile.user.has_role? :trainer %>
-        <tr class="info">
-      <% else %>
-      <tr class="danger">
-      <% end %>
+      <% if (current_user.has_role? :trainer) && (current_user.training?(profile)) %>
         <td><%= profile.id %></td>
         <td><%= link_to profile.first_name.capitalize, profile %></td>
         <td><%= profile.user.email %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
+
+
+<% if current_user.has_role? :admin %>
+
+  <h1>Listing of all profiles</h1>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @profiles.reverse_order.each do |profile| %>
+        <% if profile.user.has_role? :admin %>
+          <tr class="admin">
+        <% elsif profile.user.has_role? :trainer %>
+          <tr class="trainer">
+        <% else %>
+          <tr class="client">
+        <% end %>
+          <td><%= profile.id %></td>
+            <td><%= link_to profile.first_name.capitalize, profile %></td>
+            <td><%= profile.user.email %></td>
+            </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

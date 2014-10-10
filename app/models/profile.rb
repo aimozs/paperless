@@ -10,4 +10,6 @@ class Profile < ActiveRecord::Base
   	def make_client
 		self.user.add_role :client
 	end
+
+	
 end

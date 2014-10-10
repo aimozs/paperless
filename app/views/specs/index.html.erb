@@ -23,7 +23,9 @@
         <td><%= spec.rep %></td>
         <td><%= spec.tempo %></td>
         <td><%= spec.programme.description %></td>
-        <td><%= spec.exercise.name %></td>
+        <td><% if spec.exercise != nil %>
+          <%= spec.exercise.name %>
+        <% end %></td>
         <td><%= link_to 'Show', spec %></td>
         <td><%= link_to 'Edit', edit_spec_path(spec) %></td>
         <td><%= link_to 'Destroy', spec, method: :delete%></td>
@@ -33,5 +35,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Spec', new_spec_path %>

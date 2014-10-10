@@ -1,37 +1,49 @@
 <p id="notice"><%= notice %></p>
-<div class="row">
-	<div class="col-md-4">
-		<h2><%= link_to 'Back to programmes', programmes_path, class:'btn btn-primary' %></h2>
-		<hr>
-		<h4><strong>Client: </strong><%= @programme.user.email %></h4><strong> Due date: </strong><%= @programme.due_date %>
-		<h5><%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %></h5>
-		<p>
-		  <%= @programme.description %>
-		</p>
-	
-	</div>
-
-	<div class="col-md-4">
-		<table class="table">
+<div>
+	<%= link_to 'Back to programmes', programmes_path, class:'btn btn-primary' %>
+	<hr>
+	<h3>Choose the client: </h3>
+	<%= simple_form_for(@programme) do |f| %>
+		<%= f.error_notification %>
+		<div class="row">
+			<div class="col-xs-6">
+		      	<div class="form-group">
+		        	<%= f.collection_select :user_id, current_user.clients , :id, :email, prompt: 'Select a client' %>
+		        </div>
+		      	<h5> Due date: <%= @programme.due_date %></h5>
+		      	<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %>
+	      	</div>
+	      	<div class="col-xs-6">
+		      	<div class="form-group">
+		        	<p class="text-right"><%= f.submit 'Assign', class:'btn btn-warning', data: { confirm: 'Are you sure?' } %></p>
+		      	</div>
+		      	<div class="form-group">
+		        	<%= f.input :status, as: :hidden, input_html: { value: 'assigned' } %>
+		      	</div>
+	      	</div>
+      	</div>
+    <% end %>
+		
+	<h3><%= @programme.description %></h3>
+	<table class="table">
+		<tr>
+			<th>Exercise <%= link_to 'Add', new_spec_path(programme: @programme.id), class:'btn btn-info'%></th>
+			<th>Time</th>
+			<th>Sets</th>
+			<th>Reps</th>
+			<th>Tempo</th>
+			<th></th>
+		</tr>
+		<% @exercises.each do |exercise| %>
 			<tr>
-				<th>Exercise <%= link_to 'Add', new_spec_path(programme: @programme.id), class:'btn btn-info'%></th>
-				<th>Time</th>
-				<th>Sets</th>
-				<th>Reps</th>
-				<th>Tempo</th>
-				<th></th>
-			</tr>
-			<% @exercises.each do |exercise| %>
-				<tr>
-			        <td><%= link_to exercise.name, edit_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-warning' %></td>
-			        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.time.strftime('%H:%M') %></td>
-			        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.serie %></td>
-			        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %></td>
-			        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.tempo %></td>
-			        <td><%= link_to 'X', remove_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-danger' %></td>
-			    </tr>
-		    <% end %>
-	    </ul>
-    </div>
+		        <td><%= link_to exercise.name, edit_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-warning' %></td>
+		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.time.strftime('%H:%M') %></td>
+		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.serie %></td>
+		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %></td>
+		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.tempo %></td>
+		        <td><%= link_to 'X', remove_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
+		    </tr>
+	    <% end %>
+    </table>
 </div>
 

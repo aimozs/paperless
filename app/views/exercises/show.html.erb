@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<%= link_to 'Edit', edit_exercise_path(@exercise), class:'btn btn-info' %>
 <p>
   <strong>Name:</strong>
   <%= @exercise.name %>
@@ -12,8 +12,5 @@
 
 <p>
   <strong>Link:</strong>
-  <%= @exercise.link %>
+  <%= @exercise.video %>
 </p>
-
-<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
-<%= link_to 'Back', exercises_path %>
