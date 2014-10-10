@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 
   resources :exercises
 
-  resources :programmes
+  resources :programmes do
+    member do
+      get :assign
+    end
+  end
 
   resources :profiles do
     member do
@@ -16,7 +20,17 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users
+  devise_for :users 
+
+  resources :users do
+    member do
+      get :training
+      get :enroll
+    end
+  end
+
+resources :relationships, only: [:index, :create, :destroy]
+
   # get 'home/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

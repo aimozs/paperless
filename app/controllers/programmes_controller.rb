@@ -14,10 +14,17 @@ class ProgrammesController < ApplicationController
     @exercises = @programme.exercises
   end
 
+  def assign
+    @programme.user = client
+    @programme.status = 'assigned'
+    redirect_to :back
+  end
+
   # GET /programmes/new
   def new
     @programme = Programme.new
     @exercises = Exercise.all
+    @users = User.all
   end
 
   # GET /programmes/1/edit
@@ -29,6 +36,7 @@ class ProgrammesController < ApplicationController
   def create
     @programme = Programme.new(programme_params)
     @programme.user = current_user
+    @programme.status = 'draft'
 
     respond_to do |format|
       if @programme.save
@@ -73,6 +81,6 @@ class ProgrammesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def programme_params
-      params.require(:programme).permit(:description, :due_date, :user_id, specs_attributes:[:programme_id, :exercise_id, :time, :serie, :rep, :tempo, :_destroy])
+      params.require(:programme).permit(:description, :due_date, :user_id, specs_attributes:[:programme_id, :exercise_id, :time, :serie, :rep, :tempo, :status, :_destroy])
     end
 end

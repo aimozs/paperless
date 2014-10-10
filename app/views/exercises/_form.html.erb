@@ -9,10 +9,10 @@
       	<%= f.input :description, input_html: { class: 'form-control' } %>
     	</div>
     	<div class="form-group">
-      	<%= f.input :link, input_html: { class: 'form-control' } %>
+      	<%= f.input :video, input_html: { class: 'form-control' } %>
     	</div>
 
   <div class="form-group">
-    <%= f.submit 'Submit', class: 'btn btn-danger' %>
+    <%= f.submit 'Submit', class: 'btn btn-info' %> or <%= link_to 'Back to Programmes', programmes_path, class:'btn btn-primary' %>
   </div>
 <% end %>

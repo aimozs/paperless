@@ -1,0 +1,13 @@
+<h1>Relations</h1>
+<table class="table">
+	<tr>
+		<th>Trainer</th>
+		<th>Client</th>
+	</tr>
+	<% @relationships.each do |rel| %>
+	<tr>
+		<td><%= rel.trainer.profile.first_name %></td>
+		<td><%= rel.client.profile.first_name %></td>
+	</tr>
+	<% end %>
+</table>

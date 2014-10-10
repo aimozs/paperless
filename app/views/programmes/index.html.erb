@@ -19,19 +19,20 @@
     <tr>
       <th>Description</th>
       <th>Due date</th>
-      <th>User</th>
+      <th>Status</th>
     </tr>
   </thead>
 
+      
   <tbody>
     <% @programmes.reverse_order.each do |programme| %>
-      <tr>
-        <td><%= link_to programme.description, programme %></td>
-        <td><%= programme.due_date %></td>
-        <td><%= programme.user.profile.first_name %></td>
-        
-      </tr>
-
+      <% if (programme.user == current_user) && (programme.status == 'draft')%>
+        <tr>
+          <td><%= link_to programme.description, programme %></td>
+          <td><%= programme.due_date %></td>
+          <td><%= programme.status %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

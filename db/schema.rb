@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001004202) do
+ActiveRecord::Schema.define(version: 20141010033624) do
 
   create_table "exercises", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "link"
+    t.string   "video"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20141001004202) do
     t.date     "dob"
     t.decimal  "height"
     t.decimal  "weight"
-    t.string   "link"
+    t.string   "social"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -41,9 +41,19 @@ ActiveRecord::Schema.define(version: 20141001004202) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"
+
+  create_table "relationships", force: true do |t|
+    t.integer  "trainer_id"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["trainer_id", "client_id"], name: "index_relationships_on_trainer_id_and_client_id", unique: true
 
   create_table "roles", force: true do |t|
     t.string   "name"
