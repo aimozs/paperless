@@ -1,26 +1,6 @@
 <h1>Listing messages</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Message</th>
-      <th>From</th>
-      <th>to</th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @messages.reverse_order.each do |message| %>
-      <tr>
-          <td><%= User.find(message.sender_id).profile.first_name.capitalize %></td>
-          <td><%= User.find(message.receiver_id).profile.first_name.capitalize %></td>
-          <td><%= link_to 'X', message, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
-        </tr>
-      
-    <% end %>
-  </tbody>
-</table>
 
 <br>
 
