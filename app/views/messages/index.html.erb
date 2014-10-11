@@ -12,14 +12,7 @@
 
   <tbody>
     <% @messages.reverse_order.each do |message| %>
-      
-        <tr>
-          <td><%= link_to message.content, message_path(message) %></td>
-          <td><%= User.find(message.sender_id).profile.first_name.capitalize %></td>
-          <td><%= User.find(message.receiver_id).profile.first_name.capitalize %></td>
-          <td><%= link_to 'X', message, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
-        </tr>
-    
+      <tr><td>yo</td></tr>
     <% end %>
   </tbody>
 </table>
