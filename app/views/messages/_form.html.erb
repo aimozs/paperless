@@ -2,7 +2,7 @@
   <%= f.error_notification %>
     <div class="form-group">
     <% if current_user.has_role? :trainer %>
-      <%= f.collection_select :receiver_id, current_user.clients, :id, :email, prompt: 'Select a client' %>
+      <%= f.collection_select :receiver_id, User.all, :id, :email, prompt: 'Select a client' %>
     <% else %>
       <%= f.collection_select :receiver_id, current_user.trainers, :id, :email, {:selected => current_user.trainers.map(&:id)} %>
     <% end %>
