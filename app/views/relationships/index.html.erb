@@ -3,11 +3,13 @@
 	<tr>
 		<th>Trainer</th>
 		<th>Client</th>
+		<th></th>
 	</tr>
 	<% @relationships.each do |rel| %>
 	<tr>
 		<td><%= rel.trainer.profile.first_name %></td>
 		<td><%= rel.client.profile.first_name %></td>
+		<td><%= link_to 'X', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
 	</tr>
 	<% end %>
 </table>

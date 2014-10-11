@@ -3,6 +3,7 @@ class CreateProgrammes < ActiveRecord::Migration
     create_table :programmes do |t|
       t.text :description
       t.date :due_date
+      t.string :state
       t.references :user, index: true
 
       t.timestamps

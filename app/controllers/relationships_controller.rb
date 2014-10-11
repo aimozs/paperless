@@ -1,4 +1,5 @@
 class RelationshipsController < ApplicationController
+  before_action :set_relationship, only: [:show, :edit, :update, :destroy]
 
   def index
     @relationships = Relationship.all
@@ -11,4 +12,19 @@ class RelationshipsController < ApplicationController
       format.html { redirect_to :back }
     end
   end
+
+  def destroy
+    @relationship.destroy
+    respond_to do |format|
+      format.html { redirect_to relationships_path, notice: 'Message was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_relationship
+      @relationship = Relationship.find(params[:id])
+    end
+  
 end

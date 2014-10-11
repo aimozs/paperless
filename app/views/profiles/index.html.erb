@@ -10,12 +10,13 @@
   </thead>
 
   <tbody>
-    <% @profiles.reverse_order.each do |profile| %>
-      <% if (current_user.has_role? :trainer) && (current_user.training?(profile)) %>
-        <td><%= profile.id %></td>
-        <td><%= link_to profile.first_name.capitalize, profile %></td>
-        <td><%= profile.user.email %></td>
-      </tr>
+    <% @profiles.each do |profile| %>
+      <% if current_user.training?(profile.user) %>
+        <tr>
+          <td><%= profile.id %></td>
+          <td><%= link_to profile.first_name.capitalize, profile %></td>
+          <td><%= profile.user.email %></td>
+        </tr>
       <% end %>
     <% end %>
   </tbody>

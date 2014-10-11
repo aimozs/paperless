@@ -6,7 +6,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.date :dob
       t.decimal :height
       t.decimal :weight
-      t.string :link
+      t.string :social
       t.references :user, index: true
 
       t.timestamps

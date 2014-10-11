@@ -1,0 +1,17 @@
+<%= simple_form_for(@message) do |f| %>
+  <%= f.error_notification %>
+    <div class="form-group">
+    <% if current_user.has_role? :trainer %>
+      <%= f.collection_select :receiver_id, current_user.clients, :id, :email, prompt: 'Select a client' %>
+    <% else %>
+      <%= f.collection_select :receiver_id, current_user.trainers, :id, :email, {:selected => current_user.trainers.map(&:id)} %>
+    <% end %>
+
+    </div>
+  	<div class="form-group">
+    	<%= f.input :content, input_html: { class: 'form-control' } %>
+  	</div>
+  <div class="form-group text-right">
+    <%= f.submit 'Send', class: 'btn btn-primary' %>
+  </div>
+<% end %>
