@@ -11,8 +11,15 @@
   </thead>
 
   <tbody>
-    <% @messages.reverse_order.each do |message| %>
-      
+    <% @messages.each do |message| %>
+      <% if (message.sender_id == current_user.id) || (message.receiver_id == current_user.id) %>
+        <tr>
+          <td><%= link_to message.content, message_path(message) %></td>
+          <td><%= User.find(message.sender_id).profile.first_name.capitalize %></td>
+          <td><%= User.find(message.receiver_id).profile.first_name.capitalize %></td>
+          <td><%= link_to 'X', message, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
