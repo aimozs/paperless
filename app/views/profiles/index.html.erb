@@ -23,6 +23,30 @@
 </table>
 
 
+<h1>Clients with no PTs</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profiles.each do |profile| %>
+      <% if (profile.user.has_role? :client) && (!profile.user.has_trainer?) && (current_user != profile.user) %>
+        <tr>
+          <td><%= profile.id %></td>
+          <td><%= link_to profile.first_name.capitalize, profile %></td>
+          <td><%= profile.user.email %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
 <% if current_user.has_role? :admin %>
 
   <h1>Listing of all profiles</h1>

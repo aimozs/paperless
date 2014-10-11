@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :set_relationship, only: [:show, :edit, :update, :destroy]
+  before_action :set_relationship, only: [:destroy]
 
   def index
     @relationships = Relationship.all

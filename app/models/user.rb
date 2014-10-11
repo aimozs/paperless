@@ -21,4 +21,7 @@ class User < ActiveRecord::Base
     relationships.create!(client_id: client.id)
   end
 
+  def has_trainer?
+    reverse_relationships.any?
+  end
 end
