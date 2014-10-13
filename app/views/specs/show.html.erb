@@ -1,17 +1,26 @@
 <% if notice %>
   <p id="notice"><%= notice %></p>
 <% end %>
-<div class="videoWrapper">
-  <iframe class="youtube" src="//www.youtube.com/embed/<%= @spec.exercise.video %>" frameborder="0" allowfullscreen></iframe>
-</div>
-<hr>
+<% if @spec.exercise.video? %>
+  <div class="videoWrapper">
+    <iframe class="youtube" src="//www.youtube.com/embed/<%= @spec.exercise.video %>" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <hr>
+<% end %>
 <p>
   <strong>Exercise:</strong>
   <%= @spec.exercise.name + ' (' + @spec.time.strftime('%H:%M') + ')'%>
 </p>
 <p>
-  <strong>Sets:</strong>
-  <%= @spec.serie.to_s + ' x ' + @spec.rep.to_s + ' at ' + @spec.tempo %>
+  <% if @spec.serie?  %>
+    <%= @spec.serie %> sets
+  <% end %>
+  <% if @spec.rep? %>
+     of <%= @spec.rep%> reps
+  <% end %>
+  <% if @spec.tempo? %>
+     at <%= @spec.tempo %>
+  <% end %>
 </p>
 
 <div class='row'>
