@@ -20,10 +20,12 @@ class ProfilesController < ApplicationController
 
   def promote
     @profile.user.add_role :trainer
+    @profile.user.remove_role :client
     redirect_to :back
   end
 
   def downgrade
+    @profile.user.add_role :client
     @profile.user.remove_role :trainer
     redirect_to :back
   end

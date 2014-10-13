@@ -2,30 +2,36 @@
 <p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
 <% end %>
 <div>
-	<%= link_to '< Programmes', programmes_path, class:'btn btn-primary' %>
-	<% if current_user.has_role? :trainer %>
-		<h3>Choose the client: </h3>
+	<%= link_to '<', programmes_path, class:'btn btn-primary' %>
+	
 		<%= simple_form_for(@programme) do |f| %>
 			<%= f.error_notification %>
 			<div class="row">
-				<div class="col-xs-6">
-			      	<div class="form-group">
-			        	<%= f.collection_select :user_id, current_user.clients , :id, :email, prompt: 'Select a client' %>
-			        </div>
-			      	<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %>
-		      	</div>
-		      	<div class="col-xs-6">
-			      	<div class="form-group">
-			        	<p class="text-right"><%= f.submit 'Assign', redirect_to: programmes_path, class:'btn btn-warning', data: { confirm: 'Are you sure?' } %></p>
-			      	</div>
-			      	<div class="form-group">
-			        	<%= f.input :state, as: :hidden, input_html: { value: 'assigned' } %>
-			      	</div>
-		      	</div>
-	      	</div>
-	    <% end %>
+				<% if current_user.has_role? :trainer %>
+					<h3>Choose the client: </h3>
+						<div class="col-xs-6">
+					      	<div class="form-group">
+					        	<%= f.collection_select :user_id, current_user.clients , :id, :email, prompt: 'Select a client' %>
+					        </div>
+					      	<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %>
+				      	</div>
+				      	<div class="col-xs-6">
+					      	<div class="form-group">
+					        	<p class="text-right"><%= f.submit 'Assign', redirect_to: programmes_path, class:'btn btn-warning', data: { confirm: 'Are you sure?' } %></p>
+					      	</div>
+					      	<div class="form-group">
+					        	<%= f.input :state, as: :hidden, input_html: { value: 'assigned' } %>
+					      	</div>
+				      	</div>
+				<% end %>
+				<% if current_user.has_role? :client %>
+					<div class="col-xs-12 text-right">
+    					<%= f.submit 'Ask for review', redirect_to: programmes_path, class:'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+    				</div>
+    			<% end %>
 
-    <% end %>
+	      	</div>
+    	<% end %>
 		
 	<h3><%= @programme.description %></h3><h5> Due date: <%= @programme.due_date %></h5>
 	<% if current_user.has_role? :trainer %>

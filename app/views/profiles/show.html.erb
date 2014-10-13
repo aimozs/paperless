@@ -1,11 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h2>
-  <%= link_to 'Back to programmes', programmes_path, class:'btn btn-primary' %>
+  <%= link_to '<', programmes_path, class:'btn btn-primary' %>
   <% if current_user.has_role? :admin %>
     <%= link_to 'Back to Admin', profiles_path, class:'btn btn-warning' %>
   <% end %>
-</h2>
 
 <% if current_user == @profile.user %>
   <h2><%= link_to 'Edit', edit_profile_path(@profile), class:'btn btn-default' %></h2>
