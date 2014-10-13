@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141011043702) do
+ActiveRecord::Schema.define(version: 20141013004557) do
 
   create_table "exercises", force: true do |t|
     t.string   "name"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20141011043702) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.string   "state"
   end
 
   add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"

@@ -1,38 +1,48 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+<p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
+<% end %>
 <div>
-	<%= link_to 'Back to programmes', programmes_path, class:'btn btn-primary' %>
-	<hr>
-	<h3>Choose the client: </h3>
-	<%= simple_form_for(@programme) do |f| %>
-		<%= f.error_notification %>
-		<div class="row">
-			<div class="col-xs-6">
-		      	<div class="form-group">
-		        	<%= f.collection_select :user_id, current_user.clients , :id, :email, prompt: 'Select a client' %>
-		        </div>
-		      	<h5> Due date: <%= @programme.due_date %></h5>
-		      	<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %>
-	      	</div>
-	      	<div class="col-xs-6">
-		      	<div class="form-group">
-		        	<p class="text-right"><%= f.submit 'Assign', class:'btn btn-warning', data: { confirm: 'Are you sure?' } %></p>
+	<%= link_to '< Programmes', programmes_path, class:'btn btn-primary' %>
+	<% if current_user.has_role? :trainer %>
+		<h3>Choose the client: </h3>
+		<%= simple_form_for(@programme) do |f| %>
+			<%= f.error_notification %>
+			<div class="row">
+				<div class="col-xs-6">
+			      	<div class="form-group">
+			        	<%= f.collection_select :user_id, current_user.clients , :id, :email, prompt: 'Select a client' %>
+			        </div>
+			      	<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %>
 		      	</div>
-		      	<div class="form-group">
-		        	<%= f.input :status, as: :hidden, input_html: { value: 'assigned' } %>
+		      	<div class="col-xs-6">
+			      	<div class="form-group">
+			        	<p class="text-right"><%= f.submit 'Assign', redirect_to: programmes_path, class:'btn btn-warning', data: { confirm: 'Are you sure?' } %></p>
+			      	</div>
+			      	<div class="form-group">
+			        	<%= f.input :state, as: :hidden, input_html: { value: 'assigned' } %>
+			      	</div>
 		      	</div>
 	      	</div>
-      	</div>
+	    <% end %>
+
     <% end %>
 		
-	<h3><%= @programme.description %></h3>
+	<h3><%= @programme.description %></h3><h5> Due date: <%= @programme.due_date %></h5>
+	<% if current_user.has_role? :trainer %>
+		<%= link_to 'Add Exercise', new_spec_path(programme: @programme.id), class:'btn btn-info'%>
+	<% end %>
 	<table class="table">
 		<tr>
-			<th>Exercise <%= link_to 'Add', new_spec_path(programme: @programme.id), class:'btn btn-info'%></th>
+			<th>Exercise</th>
 			<th>Time</th>
 			<th>Sets</th>
 			<th>Reps</th>
 			<th>Tempo</th>
-			<th></th>
+			<% if current_user.has_role? :trainer %>
+				<th>Delete?</th>
+			<% else %>
+				<th>Start?</th>
+			<% end %>
 		</tr>
 		<% @exercises.each do |exercise| %>
 			<tr>
@@ -41,7 +51,11 @@
 		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.serie %></td>
 		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %></td>
 		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.tempo %></td>
+		        <% if current_user.has_role? :trainer %>
 		        <td><%= link_to 'X', remove_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
+		        <% else %>
+		        <td><%= link_to '>', spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-success'%></td>
+		        <% end %>
 		    </tr>
 	    <% end %>
     </table>

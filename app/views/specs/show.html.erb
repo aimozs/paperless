@@ -1,34 +1,23 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
 
-<p>
-  <strong>Time:</strong>
-  <%= @spec.time %>
-</p>
-
-<p>
-  <strong>Serie:</strong>
-  <%= @spec.serie %>
-</p>
-
-<p>
-  <strong>Rep:</strong>
-  <%= @spec.rep %>
-</p>
-
-<p>
-  <strong>Tempo:</strong>
-  <%= @spec.tempo %>
-</p>
-
-<p>
-  <strong>Programme:</strong>
-  <%= @spec.programme.id %>
-</p>
+<iframe width="560" height="315" src="<%= @spec.exercise.video %>" frameborder="0" allowfullscreen></iframe>
 
 <p>
   <strong>Exercise:</strong>
-  <%= @spec.exercise.name %>
+  <%= @spec.exercise.name + ' (' + @spec.time.strftime('%H:%M') + ')'%>
+</p>
+<p>
+  <strong>Sets:</strong>
+  <%= @spec.serie.to_s + ' x ' + @spec.rep.to_s + ' at ' + @spec.tempo %>
 </p>
 
-<%= link_to 'Edit', edit_spec_path(@spec) %> |
-<%= link_to 'Back', specs_path %>
+<div class='row'>
+  <div class='col-xs-6'>
+    <%= link_to 'Cancel', @spec.programme, class:'btn btn-warning' %>
+  </div>
+  <div class='col-xs-6'>
+    <%= link_to 'Done', @spec.programme, class:'btn btn-success' %>
+  </div>
+</div>

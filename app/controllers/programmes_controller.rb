@@ -16,7 +16,7 @@ class ProgrammesController < ApplicationController
 
   def assign
     @programme.user = client
-    @programme.status = 'assigned'
+    @programme.state = 'assigned'
     redirect_to :back
   end
 
@@ -36,7 +36,7 @@ class ProgrammesController < ApplicationController
   def create
     @programme = Programme.new(programme_params)
     @programme.user = current_user
-    @programme.status = 'draft'
+    @programme.state = 'draft'
 
     respond_to do |format|
       if @programme.save
@@ -81,6 +81,6 @@ class ProgrammesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def programme_params
-      params.require(:programme).permit(:description, :due_date, :user_id, specs_attributes:[:programme_id, :exercise_id, :time, :serie, :rep, :tempo, :status, :_destroy])
+      params.require(:programme).permit(:description, :due_date, :user_id, specs_attributes:[:programme_id, :exercise_id, :time, :serie, :rep, :tempo, :state, :_destroy])
     end
 end
