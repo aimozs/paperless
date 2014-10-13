@@ -1,9 +1,10 @@
 <% if notice %>
   <p id="notice"><%= notice %></p>
 <% end %>
-
-<iframe width="560" height="315" src="<%= @spec.exercise.video %>" frameborder="0" allowfullscreen></iframe>
-
+<div class="videoWrapper">
+  <iframe class="youtube" src="//www.youtube.com/embed/<%= @spec.exercise.video %>" frameborder="0" allowfullscreen></iframe>
+</div>
+<hr>
 <p>
   <strong>Exercise:</strong>
   <%= @spec.exercise.name + ' (' + @spec.time.strftime('%H:%M') + ')'%>
@@ -17,7 +18,7 @@
   <div class='col-xs-6'>
     <%= link_to 'Cancel', @spec.programme, class:'btn btn-warning' %>
   </div>
-  <div class='col-xs-6'>
+  <div class='col-xs-6 text-right'>
     <%= link_to 'Done', @spec.programme, class:'btn btn-success' %>
   </div>
 </div>

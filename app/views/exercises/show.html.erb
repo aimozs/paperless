@@ -10,7 +10,6 @@
   <%= @exercise.description %>
 </p>
 
-<p>
-  <strong>Video:</strong>
-  <%= @exercise.video %>
-</p>
+<div class="videoWrapper">
+  <iframe class="youtube" src="//www.youtube.com/embed/<%= @exercise.video %>" frameborder="0" allowfullscreen></iframe>
+</div>
