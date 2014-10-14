@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_one :profile
   has_many :messages
+  has_many :programmes
 
   has_many :relationships, foreign_key: "trainer_id", dependent: :destroy
 	has_many :clients, through: :relationships

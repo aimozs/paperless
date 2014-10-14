@@ -1,5 +1,5 @@
 class ProgrammesController < ApplicationController
-  before_action :set_programme, only: [:show, :edit, :update, :destroy]
+  before_action :set_programme, only: [:change_status, :show, :edit, :update, :destroy]
 
   # GET /programmes
   # GET /programmes.json
@@ -14,10 +14,19 @@ class ProgrammesController < ApplicationController
     @exercises = @programme.exercises
   end
 
-  def assign
-    @programme.user = client
-    @programme.state = 'assigned'
-    redirect_to :back
+  def change_status
+    # @new_state = params[:programme_status]
+    # @programme.user = params[:client]
+    if @programme.programme_status == 'draft'
+      @programme.update_attribute('programme_status', 'assigned')
+      redirect_to :programmes
+    else
+      @programme.update_attribute('programme_status', 'completed')
+      redirect_to :review
+    end
+  end
+
+  def review
   end
 
   # GET /programmes/new
@@ -36,7 +45,7 @@ class ProgrammesController < ApplicationController
   def create
     @programme = Programme.new(programme_params)
     @programme.user = current_user
-    @programme.state = 'draft'
+    @programme.programme_status = 'draft'
 
     respond_to do |format|
       if @programme.save
@@ -81,6 +90,6 @@ class ProgrammesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def programme_params
-      params.require(:programme).permit(:description, :due_date, :user_id, specs_attributes:[:programme_id, :exercise_id, :time, :serie, :rep, :tempo, :state, :_destroy])
+      params.require(:programme).permit(:description, :due_date, :user_id, :client, :programme_status, specs_attributes:[:programme_id, :exercise_id, :weight, :time, :serie, :rep, :tempo, :_destroy])
     end
 end

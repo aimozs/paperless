@@ -1,4 +1,5 @@
-<h1>Listing messages</h1>
+<%= link_to 'New Message', new_message_path, class:'btn btn-warning' %>
+<h1>New messages</h1>
 
 <table class="table">
   <thead>
@@ -6,13 +7,13 @@
       <th>Message</th>
       <th>From</th>
       <th>to</th>
-      <th></th>
+      <th>Delete?</th>
     </tr>
   </thead>
 
   <tbody>
     <% @messages.reverse_order.each do |message| %>
-      <% if (message.sender_id == current_user.id) || (message.receiver_id == current_user.id) %>
+      <% if (message.receiver_id == current_user.id && message.read == false) %>
         <tr>
           <td><%= link_to message.content, message_path(message) %></td>
           <td><%= User.find(message.sender_id).profile.first_name.capitalize %></td>
@@ -24,6 +25,33 @@
   </tbody>
 </table>
 
-<br>
+<h1>Old messages</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>From</th>
+      <th>to</th>
+      <th>Delete?</th>
+    </tr>
+  </thead>
 
-<%= link_to 'New Message', new_message_path, class:'btn btn-warning' %>
+  <tbody>
+    <% @messages.reverse_order.each do |message| %>
+    <% if message.read == true %>
+      <% if (message.sender_id == current_user.id) || (message.receiver_id == current_user.id) %>
+        <tr>
+          <td><%= link_to message.content, message_path(message) %></td>
+          <td><%= User.find(message.sender_id).profile.first_name.capitalize %></td>
+          <td><%= User.find(message.receiver_id).profile.first_name.capitalize %></td>
+          <td><%= link_to 'X', message, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+

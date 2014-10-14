@@ -50,7 +50,7 @@
       <%= f.submit "Enroll " + @profile.first_name.capitalize, class: "btn btn-large btn-success" %>
     <% end %>
 <% end %>
-
+ 
 <% if (current_user.has_role? :admin) && (@profile.user != current_user) %>
 <p style="text-align:right;">
   <% if @profile.user.has_role? :trainer %>

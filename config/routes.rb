@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :programmes do
     member do
-      get :assign
+      get :change_status
     end
   end
 
@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     end
   end
 
+  
+
 resources :relationships, only: [:index, :create, :destroy]
 
   # get 'home/index'
@@ -40,7 +42,7 @@ resources :relationships, only: [:index, :create, :destroy]
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-
+  get '/review' => 'home#review'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

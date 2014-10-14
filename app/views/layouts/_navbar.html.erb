@@ -27,16 +27,17 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav nav nav-pills nav-stacked">
             <!-- if the signed in user is trainer, he can see a list of exercises -->
             <% if current_user.has_role? :trainer %>
               <li><%= link_to 'Clients', profiles_path %></li>
               <li><%= link_to 'Exercices', exercises_path %></li>
               <li><hr></li>
+              
             <% end %>
 
             <li><%= link_to 'Programmes', programmes_path %></li>
-            <li><%= link_to 'Messages', messages_path %></li>
+            <li><a href="<%= messages_path %>">Messages<span class="badge"><%= @nummess %></span></a></li>
             <% if current_user.profile %>
               <li><%= link_to current_user.profile.first_name.capitalize + "'s Profile", profile_path(current_user.profile) %></li>
             <% else %>
@@ -44,7 +45,9 @@
             <% end %>
 
             <li><hr></li>
+            <li><%= link_to 'Feedback' %></li>
             <li><%= link_to 'Sign out' , destroy_user_session_path, method: :delete %></li>
+
         </ul>
       </div>
       <% else %>

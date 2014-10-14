@@ -8,4 +8,6 @@ class Programme < ActiveRecord::Base
   def self.reverse_order
     order(created_at: :desc)
   end
+
+  
 end

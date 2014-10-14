@@ -6,24 +6,47 @@
     <thead>
       <tr>
         <th>Description</th>
+        <th></th>
         <th>Due date</th>
-        <th>State</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <% @programmes.reverse_order.each do |programme| %>
-        <% if (programme.user == current_user) && (programme.state == 'draft')%>
+        <% if (programme.user == current_user) && (programme.programme_status == 'draft')%>
+          <tr>
+            <td><%= link_to programme.description, programme %></td>
+            <td><%= programme.client %></td>
+            <td><%= programme.due_date %></td>
+            <td><%= programme.programme_status %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <h3>List of programmes (Completed)</h3>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Due date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @programmes.reverse_order.each do |programme| %>
+        <% if (programme.user == current_user) && (programme.programme_status == 'completed')%>
           <tr>
             <td><%= link_to programme.description, programme %></td>
             <td><%= programme.due_date %></td>
-            <td><%= programme.state %></td>
+            <td><%= programme.programme_status %></td>
           </tr>
         <% end %>
       <% end %>
     </tbody>
   </table>
 <% end %>
-
 
   <h3>List of programmes (Assigned)</h3>
   <table class="table table-hover">
@@ -31,42 +54,19 @@
       <tr>
         <th>Description</th>
         <th>Due date</th>
-        <th>State</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <% @programmes.reverse_order.each do |programme| %>
-        <% if (programme.user == current_user)%>
+        <% if programme.client == current_user.id %>
           <tr>
             <td><%= link_to programme.description, programme %></td>
             <td><%= programme.due_date %></td>
-            <td><%= programme.state %></td>
+            <td><%= programme.programme_status %></td>
           </tr>
         <% end %>
       <% end %>
     </tbody>
   </table>
 
-<% if current_user.has_role? :trainer %>
-  <h3>List of programmes (Completed)</h3>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Due date</th>
-        <th>State</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @programmes.reverse_order.each do |programme| %>
-        <% if (programme.user == current_user) && (programme.state == 'completed')%>
-          <tr>
-            <td><%= link_to programme.description, programme %></td>
-            <td><%= programme.due_date %></td>
-            <td><%= programme.state %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>

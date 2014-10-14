@@ -10,6 +10,8 @@ gem 'cancan'
 
 gem 'simple_form'
 gem 'nested_form'
+
+gem 'twitter-typeahead-rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
 gem 'pg', group: :production

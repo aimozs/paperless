@@ -2,13 +2,16 @@
   <div class="col-md-4 col-xs-12">
     <%= simple_form_for(@programme) do |f| %>
     <%= f.error_notification %>
+      <div class="form-group">
+        <%= f.collection_select :client, current_user.clients , :id, :email, prompt: 'Select a client' %>
+      </div>
     	<div class="form-group">
       	<%= f.input :description, input_html: { class: 'form-control' } %>
     	</div>
     	<div class="form-group">
       	<%= f.input :due_date, input_html: { class: 'form-control' } %>
     	</div>
-        <%= f.input :state, as: :hidden, input_html: { value: "draft" } %>
+      
       <div class="form-group">
         <%= f.submit 'Submit', class: 'btn btn-success' %>
       </div>
