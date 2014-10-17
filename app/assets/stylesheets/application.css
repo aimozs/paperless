@@ -1,0 +1,59 @@
+.admin {
+  background-color: #ffd700;
+  color: black;
+}
+
+.trainer {
+  background-color: #c0c0c0;
+  color: black;
+}
+
+.client {
+  background-color: #de8f43;
+  color: black;
+}
+
+input *{
+	color: black;
+}
+
+select *{
+	color: black;
+}
+
+.controls * {
+	color: black;
+}
+
+.splash-image {
+	width: 15em;
+}
+
+.highlighted-block{
+padding: 1em;
+margin: 1em;
+}
+
+#sign-in {
+	background-color: yellow;
+	font-size: 2em !important;
+	color: black;
+	border-radius: 1em !important;
+}
+
+#sign-up {
+	background-color: green;
+	color: black;
+	border-radius: 1em !important;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+
+.splash-image {
+	width: 80%;
+}
+
+}

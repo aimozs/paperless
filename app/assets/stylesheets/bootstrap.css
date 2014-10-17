@@ -52,18 +52,6 @@ a:active,
 a:hover {
   outline: 0;
 }
-.admin {
-  background-color: #ffd700;
-  color: black;
-}
-.trainer {
-  background-color: #c0c0c0;
-  color: black;
-}
-.client {
-  background-color: #de8f43;
-  color: black;
-}
 
 .videoWrapper {
   position: relative;

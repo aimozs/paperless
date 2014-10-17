@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def nummess
-		@nummess = Message.where((user_id = current_user.id) && (read = false)).count
+		@nummess = Message.where((user_id = current_user) && (read = false)).count
 	end
+
 end

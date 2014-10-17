@@ -14,7 +14,7 @@
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">My Online PT</a>
+      <a class="navbar-brand" href="/">Insert name and logo</a>
       <% if user_signed_in? %>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -45,9 +45,15 @@
             <% end %>
 
             <li><hr></li>
-            <li><%= link_to 'Feedback' %></li>
+            <li>
+              <% if current_user.has_role? :admin %>
+              <%= link_to 'manage users', profiles_path %>
+              <% else %>
+              <%= link_to 'Feedback' %>
+              <% end %>
+            </li>
             <li><%= link_to 'Sign out' , destroy_user_session_path, method: :delete %></li>
-
+            <li><%= link_to 'become Admin', unlock_profile_path(current_user) %></li>
         </ul>
       </div>
       <% else %>

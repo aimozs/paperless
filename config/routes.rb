@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     member do
       get :promote
       get :downgrade
+      get :unlock
     end
   end
 
