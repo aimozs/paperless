@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
 	def nummess
 		if user_signed_in?
-			@nummess = Message.where((user_id = current_user.id) && (read = false)).count
+			@nummess = Message.where("receiver_id = ? AND read = ?", current_user, false).count
 		end
 	end
 end

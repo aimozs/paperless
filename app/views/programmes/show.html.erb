@@ -7,13 +7,15 @@
 		<%= simple_form_for(@programme) do |f| %>
 			<%= f.error_notification %>
 			<div class="row">
-				<% if current_user.has_role? :trainer %>
+				<% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
 					<div class="col-xs-6">
 						<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %>
 					</div>
-					<div class="col-xs-6">
-				      	<p class="text-right"><%= link_to 'Send to client', change_status_programme_path(@programme.id), class:'btn btn-danger' %></p>
-			      	</div>
+						<div class="col-xs-6">
+					      	<p class="text-right">
+					      	<%= link_to 'Send to client', change_status_programme_path(@programme.id), class:'btn btn-danger' %>
+					      	</p>
+				      	</div>
 				<% end %>
 				<% if ((current_user.has_role? :client) && (@programme.client == current_user.id))%>
 					<div class="col-xs-12 text-right">
@@ -27,7 +29,7 @@
 
 		
 	<h3><%= @programme.description %></h3><h5> Due date: <%= @programme.due_date %></h5>
-	<% if current_user.has_role? :trainer %>
+	<% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
 		<%= link_to 'Add Exercise', new_spec_path(programme: @programme.id), class:'btn btn-info'%>
 	<% end %>
 	<table class="table">
@@ -36,25 +38,27 @@
 			<th>Weight</th>
 			<th>Sets</th>
 			<th>Reps</th>
-			<th>Tempo</th>
-			<th>Rest</th>
-			<% if current_user.has_role? :trainer %>
+			<% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
 				<th>Delete?</th>
-			<% else %>
+			<% end  %>
+			<% if (current_user.has_role? :client) && (@programme.programme_status == 'assigned') %>
 				<th>Start?</th>
 			<% end %>
 		</tr>
 		<% @exercises.each do |exercise| %>
 			<tr>
+				<% if current_user.has_role? :trainer %>
 		        <td><%= link_to exercise.name, edit_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-warning' %></td>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.weight %></td>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.set %></td>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %></td>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.tempo %></td>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.time.strftime('%H:%M') %></td>
-		        <% if current_user.has_role? :trainer %>
-		        <td><%= link_to 'X', remove_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
 		        <% else %>
+		        <td><%= link_to exercise.name, '#', class:'btn btn-warning disabled' %></td>
+		        <% end %>
+		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.weight_cl %> / <%= exercise.specs.where('programme_id = ?', @programme.id).first.weight %></td>
+		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.set_cl %> / <%= exercise.specs.where('programme_id = ?', @programme.id).first.set %></td>
+		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.rep_cl %> / <%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %></td>
+		        <% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
+		        <td><%= link_to 'X', remove_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
+		        <% end %>
+		        <% if (current_user.has_role? :client) && (@programme.programme_status == 'assigned') %>
 		        <td><%= link_to '>', spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-success'%></td>
 		        <% end %>
 		    </tr>

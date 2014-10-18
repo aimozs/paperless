@@ -20,6 +20,16 @@
     <div class="form-group">
       <%= f.input :time, discard_hour: true, input_html: { class: 'form-control' }, default: Time.parse('0:01') %>
     </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Recap for this exercise</div>
+      <div class="panel-body">
+        <%= @spec.set_cl %> x <%= @spec.rep_cl %> with <%= @spec.weight_cl %>Kg
+      </div>
+      <div class="panel-heading">Note about this exercise</div>
+      <div class="panel-body">
+        <%= @spec.note %>
+      </div>
+    </div>
 
   	<% if @programme_id %>
       <%= f.input :programme_id, as: :hidden, input_html: { value: @programme_id } %>

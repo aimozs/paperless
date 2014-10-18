@@ -7,27 +7,51 @@
   </div>
   <hr>
 <% end %>
-<p>
-  <strong>Exercise:</strong>
-  <%= @spec.exercise.name + ' (' + @spec.time.strftime('%H:%M') + ')'%>
-</p>
-<p>
-  <% if @spec.serie?  %>
-    <%= @spec.serie %> sets
-  <% end %>
-  <% if @spec.rep? %>
-     of <%= @spec.rep%> reps
-  <% end %>
-  <% if @spec.tempo? %>
-     at <%= @spec.tempo %>
-  <% end %>
-</p>
+
+<div class="panel panel-warning">
+  <div class="panel-heading"><%= @spec.exercise.name + ' (' + @spec.time.strftime('%M') + ' mins)'%></div>
+  <div class="panel-body">
+      <% if @spec.set?  %>
+        <%= @spec.set %> sets
+      <% end %>
+      <% if @spec.rep? %>
+         of <%= @spec.rep%> reps
+      <% end %>
+      <% if @spec.tempo? %>
+         at <%= @spec.tempo %>
+      <% end %>
+  </div>
+</div>
+
+<h3>To create a better programme next time, please fill up the stats for this exercise!</h3>
+<div>
+<%= simple_form_for(@spec) do |f| %>
+  <%= f.error_notification %>
+  <% if @spec.weight %>
+    <div class="form-group">
+      <%= f.input :weight_cl, input_html: { class: 'form-control' } %>
+    </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.input :set_cl, input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :rep_cl, input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :note, input_html: { class: 'form-control' } %>
+    </div>
+
+
+
 
 <div class='row'>
   <div class='col-xs-6'>
-    <%= link_to 'Cancel', @spec.programme, class:'btn btn-warning' %>
+    <%= link_to 'Cancel', @spec.programme, class:'btn btn-danger' %>
   </div>
   <div class='col-xs-6 text-right'>
-    <%= link_to 'Done', @spec.programme, class:'btn btn-success' %>
+    <%= f.submit 'Submit', class: 'btn btn-success' %>
   </div>
+</div>
+<% end %>
 </div>

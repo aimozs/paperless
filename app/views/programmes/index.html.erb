@@ -59,7 +59,7 @@
     </thead>
     <tbody>
       <% @programmes.reverse_order.each do |programme| %>
-        <% if (programme.client == current_user.id) && (programme.programme_status == 'assigned')%>
+        <% if ((programme.user_id == current_user.id) || (programme.client == current_user.id)) && (programme.programme_status == 'assigned')%>
           <tr>
             <td><%= link_to programme.description, programme %></td>
             <td><%= programme.due_date %></td>

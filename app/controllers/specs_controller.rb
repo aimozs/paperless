@@ -81,6 +81,6 @@ class SpecsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spec_params
-      params.require(:spec).permit(:time, :weight, :set, :rep, :tempo, :programme_id, :exercise_id)
+      params.require(:spec).permit(:time, :weight, :set, :rep, :tempo, :weight_cl, :rep_cl, :set_cl, :note, :programme_id, :exercise_id)
     end
 end
