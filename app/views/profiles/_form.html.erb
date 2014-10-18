@@ -1,12 +1,24 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
-
+  <div class="col-md-12 admin">
+    <strong>Are you a trainer or being trained?</strong>
+    <%= link_to 'trainer', betrainer_profile_path(current_user), class: 'btn trainer' %>
+    <%= link_to 'client', beclient_profile_path(current_user), class: 'btn client' %>
+    <% if current_user.has_role? :trainer %>
+      <style>.btn.trainer{border: 3px solid white; padding: -3px;}</style>
+    <% else %>
+      <style>.btn.client{border: 3px solid white; padding: -3px;}</style>
+    <% end %>
+  </div>
   	<div class="form-group">
     	<%= f.input :first_name, input_html: { class: 'form-control' } %>
   	</div>
   	<div class="form-group">
     	<%= f.input :last_name, input_html: { class: 'form-control' } %>
   	</div>
+    <div class="form-group">
+      <%= f.input :gender, input_html: { class: 'form-control' } %>
+    </div>
   	<div class="form-group">
     	<%= f.input :dob, start_year: Date.today.year - 60, end_year: Date.today.year - 6, input_html: { class: 'form-control' } %>
   	</div>
@@ -16,6 +28,15 @@
   	<div class="form-group">
     	<%= f.input :weight, input_html: { class: 'form-control' } %>
   	</div>
+    <div class="form-group">
+      <%= f.input :bodyfat, input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :injuries, input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :agreed, label: 'do you agree to the engagement agreement?', input_html: { class: 'checkbox-input' } %>
+    </div>
   	<div class="form-group">
     	<%= f.input :social, input_html: { class: 'form-control' } %>
   	</div>

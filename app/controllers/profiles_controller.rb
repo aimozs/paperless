@@ -29,11 +29,31 @@ class ProfilesController < ApplicationController
     @profile.user.remove_role :trainer
     redirect_to :back
   end
+
   def unlock
       current_user.add_role :admin
       current_user.remove_role :client
+      redirect_to :back, notice: 'now you are an admin'
+  end
+
+  def lock
+      current_user.add_role :client
+      current_user.remove_role :admin
+      redirect_to :back, notice: 'now you are normal'
+  end
+
+  def betrainer
+      current_user.add_role :trainer
+      current_user.remove_role :client
       redirect_to :back
   end
+
+  def beclient
+      current_user.add_role :client
+      current_user.remove_role :trainer
+      redirect_to :back
+  end
+
   # GET /profiles/1/edit
   def edit
   end

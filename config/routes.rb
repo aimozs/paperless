@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       get :promote
       get :downgrade
       get :unlock
+      get :lock
+      get :betrainer
+      get :beclient
     end
   end
 

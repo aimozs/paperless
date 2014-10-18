@@ -1,21 +1,23 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+<nav role="navigation"
     <% if user_signed_in? %>
       <% if current_user.has_role? :admin %>
-        style="background-color: #ffd700;"
+        class="navbar navbar-fixed-top admin"
         <% else %>
           <% if current_user.has_role? :trainer %>
-            style="background-color: #c0c0c0;"
+            class="navbar navbar-fixed-top trainer"
           <% else %>
-            style="background-color: #de8f43;"
+            class="navbar navbar-fixed-top client"
           <% end %>
       <% end %>
+    <% else %>
+      style="display: none;"
     <% end %>
     >
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">Insert name and logo</a>
       <% if user_signed_in? %>
+      <div class="navbar-header">
+      <a class="navbar-brand" href="/">Insert name and logo</a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -53,7 +55,11 @@
               <% end %>
             </li>
             <li><%= link_to 'Sign out' , destroy_user_session_path, method: :delete %></li>
-            <li><%= link_to 'become Admin', unlock_profile_path(current_user) %></li>
+            <% if current_user.has_role? :admin %>
+              <li><%= link_to 'become normal', lock_profile_path(current_user) %></li>
+            <% else %>
+              <li><%= link_to 'become Admin', unlock_profile_path(current_user) %></li>
+            <% end %>
         </ul>
       </div>
       <% else %>
