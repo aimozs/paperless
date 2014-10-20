@@ -3,7 +3,6 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>ID</th>
       <th>First name</th>
       <th>Email</th>
     </tr>
@@ -13,7 +12,6 @@
     <% @profiles.each do |profile| %>
       <% if current_user.training?(profile.user) %>
         <tr>
-          <td><%= profile.id %></td>
           <td><%= link_to profile.first_name.capitalize, profile %></td>
           <td><%= profile.user.email %></td>
         </tr>
@@ -27,7 +25,6 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>ID</th>
       <th>First name</th>
       <th>Email</th>
     </tr>
@@ -36,8 +33,13 @@
   <tbody>
     <% @profiles.each do |profile| %>
       <% if (profile.user.has_role? :client) && (!profile.user.has_trainer?) && (current_user != profile.user) %>
-        <tr>
-          <td><%= profile.id %></td>
+        <% if profile.user.has_role? :admin %>
+          <tr class="admin">
+        <% elsif profile.user.has_role? :trainer %>
+          <tr class="trainer">
+        <% else %>
+          <tr class="client">
+        <% end %>
           <td><%= link_to profile.first_name.capitalize, profile %></td>
           <td><%= profile.user.email %></td>
         </tr>
@@ -54,7 +56,6 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>ID</th>
         <th>First name</th>
         <th>Email</th>
       </tr>
@@ -69,7 +70,6 @@
         <% else %>
           <tr class="client">
         <% end %>
-          <td><%= profile.id %></td>
             <td><%= link_to profile.first_name.capitalize, profile %></td>
             <td><%= profile.user.email %></td>
             </tr>

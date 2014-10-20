@@ -1,0 +1,119 @@
+a {
+	color: black !important;
+}
+.navbar *{
+	color: black !important;
+}
+
+#user_remember_me{
+	position: static !important;
+	display: inline-block !important;
+	margin: .1em !important;
+	margin-left: 1em !important;
+}
+
+.user_remember_me .controls{
+	display: inline-block;
+	margin-right: 0;
+	padding-right: 0;
+}
+.btn {
+	margin: 1em !important;
+}
+.admin {
+  background-color: #963e4f !important;
+  color: black !important;
+}
+
+.trainer {
+  background-color: #0f6666 !important;
+    color: black !important;
+}
+
+.client {
+  background-color: #729f17 !important;
+    color: black !important;
+}
+
+input *{
+	color: black;
+}
+
+select *{
+	color: black;
+}
+
+.controls * {
+	color: black;
+}
+
+.boolean .controls {
+width: 3em;
+margin: 0em !important;
+display: inline-block !important;
+position: static !important;
+vertical-align: bottom;
+}
+
+.checkbox-input {
+	margin: 0 !important;
+	width: 100%;
+	height: 100%;
+}
+.splash-image {
+	width: 15em;
+	margin-top: -10em;
+}
+
+.highlighted-block{
+padding: 1em;
+margin: 1em;
+}
+
+#sign-in {
+	background-color: yellow;
+	font-size: 2em !important;
+	color: black;
+	border-radius: 1em !important;
+}
+
+#sign-up {
+	background-color: green;
+	color: black;
+	border-radius: 1em !important;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+
+.splash-image {
+	width: 80%;
+	margin-top: 0 !important;
+}
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (min-width : 1224px) {
+
+.splash-image {
+	width: 80%;
+	margin-top: 0 !important;
+}
+
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (max-width : 1024px) {
+.splash-image {
+	width: 80%;
+	margin-top: 0 !important;
+}
+}

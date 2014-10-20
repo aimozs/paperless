@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
 			@nummess = Message.where("receiver_id = ? AND read = ?", current_user, false).count
 		end
 	end
+
 end
