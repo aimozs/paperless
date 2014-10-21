@@ -2,7 +2,7 @@
 <p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
 <% end %>
 <div>
-	<%= link_to '<', programmes_path, class:'btn btn-primary' %>
+	<%= link_to '<', :back, class:'btn btn-primary' %>
 	
 		<%= simple_form_for(@programme) do |f| %>
 			<%= f.error_notification %>
