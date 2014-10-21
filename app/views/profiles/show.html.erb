@@ -1,16 +1,13 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<%= link_to '<', :back, class:'btn btn-primary' %>
-
-<% if current_user.has_trainer? %>
-Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %>
-<% else %>
-You currently don't have a trainer.
-<% end %>
-
-<% if current_user == @profile.user %>
-  <h2><%= link_to 'Edit', edit_profile_path(@profile), class:'btn btn-default' %></h2>
-<% end %>
+<div class="col-md-6">
+<div class="highlight">
+  <% if current_user.has_trainer? && (current_user.has_role? :client) %>
+    Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %>
+  <% elsif current_user.has_role? :client %>
+    You currently don't have a trainer.
+  <% end %>
+</div>
 
 <p>
   <strong>First name:</strong>
@@ -63,6 +60,17 @@ You currently don't have a trainer.
   <strong>Email:</strong>
   <%= @profile.user.email %>
 </p>
+<% if current_user == @profile.user %>
+  <h2><%= link_to 'Edit your profile', edit_profile_path(@profile), class:'btn btn-default' %></h2>
+<% end %>
+</div>
+
+<% if current_user.has_trainer? && (current_user.has_role? :client) %>
+<div class="col-md-6">
+  <strong>Engagement agreement:</strong>
+  <%= current_user.my_trainer.engagement %>
+</div>
+<% end %>
 
 <% if (current_user.has_role? :trainer) && (@profile.user != current_user) && (!current_user.training?(@profile.user))%>
     <%= form_for(current_user.relationships.build(client_id: @profile.user.id)) do |f| %>

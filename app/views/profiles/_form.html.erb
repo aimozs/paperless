@@ -1,6 +1,6 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
-  <div class="col-md-12 admin">
+  <div class="highlight">
     <strong>Are you a trainer or being trained?</strong>
     <%= link_to 'trainer', betrainer_profile_path(current_user), class: 'btn trainer' %>
     <%= link_to 'client', beclient_profile_path(current_user), class: 'btn client' %>
@@ -10,6 +10,7 @@
       <style>.btn.client{border: 3px solid white; padding: -3px;}</style>
     <% end %>
   </div>
+  <div class="col-md-6">
   	<div class="form-group">
     	<%= f.input :first_name, input_html: { class: 'form-control' } %>
   	</div>
@@ -19,8 +20,8 @@
   	<div class="form-group">
     	<%= f.input :social, input_html: { class: 'form-control' } %>
   	</div>
-    <% if current_user.has_role? :client %>
-        <div class="form-group">
+  <% if current_user.has_role? :client %>
+    <div class="form-group">
       <%= f.input :gender, input_html: { class: 'form-control' } %>
     </div>
     <div class="form-group">
@@ -38,14 +39,25 @@
     <div class="form-group">
       <%= f.input :injuries, input_html: { class: 'form-control' } %>
     </div>
-    <% elsif current_user.has_role? :trainer %>
+  </div>
+  <div class="col-md-6">
+    <% if current_user.has_trainer? %>
+      <strong>Engagement agreement:</strong>
+      <%= current_user.my_trainer.engagement %>
+      <div class="form-group">
+        <%= f.input :agreed, input_html: { class: 'form-control' } %>
+      </div>
+    <% end %>
+  <% elsif current_user.has_role? :trainer %>
       <div class="form-group">
         <%= f.input :engagement, input_html: { class: 'form-control' } %>
         This is the agreement that your clients will agree to when you enroll them.
       </div>
-    <% end %>
-
-  <div class="form-group">
-    <%= f.submit 'Submit', class: 'btn btn-default' %> or <%= link_to 'Back to Programmes', programmes_path, class:'btn btn-primary' %>
+  <% end %>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.submit 'Submit', class: 'btn btn-default' %> or <%= link_to 'Back to Programmes', programmes_path, class:'btn btn-primary' %>
+    </div>
   </div>
 <% end %>
