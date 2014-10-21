@@ -1,6 +1,6 @@
 <% if current_user.has_role? :client %>
   <div class="highlight">
-    <% if current_user.has_trainer? %>
+    <% if current_user.has_trainer?  && (current_user.has_role? :client) %>
       Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %>
     <% elsif current_user.has_role? :client %>
       You currently don't have a trainer.
