@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20141018120758) do
+=======
 ActiveRecord::Schema.define(version: 20141021042813) do
+>>>>>>> 8b9efa8ce6105395bb15c5fad87918b9a7beb461
 
   create_table "exercises", force: true do |t|
     t.string   "name"
@@ -52,11 +56,11 @@ ActiveRecord::Schema.define(version: 20141021042813) do
   create_table "programmes", force: true do |t|
     t.text     "description"
     t.date     "due_date"
-    t.string   "programme_status"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "client"
+    t.string   "programme_status"
+    t.integer  "client",           limit: 255
   end
 
   add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"
