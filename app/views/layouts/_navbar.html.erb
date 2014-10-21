@@ -51,9 +51,9 @@
             <% end %>
             <li><%= link_to 'Sign out' , destroy_user_session_path, method: :delete %></li>
             <% if current_user.has_role? :admin %>
-              <li><%= link_to 'become normal', lock_profile_path(current_user) %></li>
+              <li><%= link_to 'become normal', lock_path(current_user) %></li>
             <% else %>
-              <li><%= link_to 'become Admin', unlock_profile_path(current_user) %></li>
+              <li><%= link_to 'become Admin', unlock_path(current_user) %></li>
             <% end %>
         </ul>
       </div>
