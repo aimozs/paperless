@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
 
   	def after_sign_in_path_for(resource)
 		if current_user.profile
-	 		profile_path(current_user.profile)
+			if current_user.has_trainer? && current_user.profile.agreed?
+	 			programmes_path(current_user.profile)
+	 		else
+	 			edit_profile_path(current_user.profile)
+	 		end
 	 	else
 	 		new_profile_path
 	 	end

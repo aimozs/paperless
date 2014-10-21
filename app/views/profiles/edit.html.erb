@@ -1,4 +1,8 @@
-<h1>Editing profile</h1>
-
+<% if current_user.has_trainer? && !current_user.profile.agreed %>
+	 			<h1>Your PT has sent you an agreement!</h1>
+	 			<h2>Please agree to the engagement to continue</h2>
+<% else %>
+	 			<h1>Editing your profile</h1>
+<% end %>
 <%= render 'form' %>
 

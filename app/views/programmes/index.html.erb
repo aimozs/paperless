@@ -1,3 +1,13 @@
+<% if current_user.has_role? :client %>
+  <div class="highlight">
+    <% if current_user.has_trainer? %>
+      Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %>
+    <% elsif current_user.has_role? :client %>
+      You currently don't have a trainer.
+    <% end %>
+  </div>
+<% end %>
+
 <% if current_user.has_role? :trainer %>
 <h3>List of programmes (Draft)</h3>
   <%= link_to 'New programme', new_programme_path, class:'btn btn-success' %>

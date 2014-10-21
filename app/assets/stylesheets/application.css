@@ -5,6 +5,27 @@ a {
 	color: black !important;
 }
 
+.back-button {
+	position: relative;
+	bottom: 1em;
+	z-index: 3;
+}
+
+.yield{
+	margin-bottom: 4em;
+}
+
+.bottom-bar {
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	font-size: 1em;
+	padding: 1em;
+	z-index: 3;
+}
+
 #user_remember_me{
 	position: static !important;
 	display: inline-block !important;
@@ -20,6 +41,15 @@ a {
 .btn {
 	margin: 1em !important;
 }
+
+.highlight {
+	  background-color: #963e4f !important;
+	  margin: 1em;
+	  padding: .5em;
+	  font-weight: bold;
+	  display: inline-block;
+}
+
 .admin {
   background-color: #963e4f !important;
   color: black !important;
@@ -49,7 +79,7 @@ select *{
 
 .boolean .controls {
 width: 3em;
-margin: 0em !important;
+margin-left: 3em;
 display: inline-block !important;
 position: static !important;
 vertical-align: bottom;

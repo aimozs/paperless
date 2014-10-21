@@ -1,13 +1,13 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
-  <%= link_to '<', programmes_path, class:'btn btn-primary' %>
-  <% if current_user.has_role? :admin %>
-    <%= link_to 'Back to Admin', profiles_path, class:'btn btn-warning' %>
+<div class="col-md-6">
+<div class="highlight">
+  <% if current_user.has_trainer? && (current_user.has_role? :client) %>
+    Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %>
+  <% elsif current_user.has_role? :client %>
+    You currently don't have a trainer.
   <% end %>
-
-<% if current_user == @profile.user %>
-  <h2><%= link_to 'Edit', edit_profile_path(@profile), class:'btn btn-default' %></h2>
-<% end %>
+</div>
 
 <p>
   <strong>First name:</strong>
@@ -18,7 +18,11 @@
   <strong>Last name:</strong>
   <%= @profile.last_name %>
 </p>
-
+<% if current_user.has_role? :client %>
+<p>
+  <strong>Gender:</strong>
+  <%= @profile.gender %>
+</p>
 <p>
   <strong>Dob:</strong>
   <%= @profile.dob %>
@@ -33,7 +37,20 @@
   <strong>Weight:</strong>
   <%= @profile.weight %>
 </p>
-
+<p>
+  <strong>Bodyfat:</strong>
+  <%= @profile.bodyfat %>
+</p>
+<p>
+  <strong>Injuries:</strong>
+  <%= @profile.injuries %>
+</p>
+<% elsif current_user.has_role? :trainer %>
+<p>
+  <strong>Engagement agreement:</strong>
+  <%= @profile.engagement %>
+</p>
+<% end %>
 <p>
   <strong>Social:</strong>
   <%= @profile.social %>
@@ -43,6 +60,17 @@
   <strong>Email:</strong>
   <%= @profile.user.email %>
 </p>
+<% if current_user == @profile.user %>
+  <h2><%= link_to 'Edit your profile', edit_profile_path(@profile), class:'btn btn-default' %></h2>
+<% end %>
+</div>
+
+<% if current_user.has_trainer? && (current_user.has_role? :client) %>
+<div class="col-md-6">
+  <strong>Engagement agreement:</strong>
+  <%= current_user.my_trainer.engagement %>
+</div>
+<% end %>
 
 <% if (current_user.has_role? :trainer) && (@profile.user != current_user) && (!current_user.training?(@profile.user))%>
     <%= form_for(current_user.relationships.build(client_id: @profile.user.id)) do |f| %>

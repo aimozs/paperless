@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018120758) do
-
+ActiveRecord::Schema.define(version: 20141021042813) do
 
   create_table "exercises", force: true do |t|
     t.string   "name"
@@ -44,7 +43,7 @@ ActiveRecord::Schema.define(version: 20141018120758) do
     t.decimal  "bodyfat"
     t.text     "injuries"
     t.string   "gender"
-    t.integer  "age"
+    t.text     "engagement"
     t.boolean  "agreed"
   end
 
@@ -92,7 +91,6 @@ ActiveRecord::Schema.define(version: 20141018120758) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "weight"
-    t.integer  "reps_cl"
     t.integer  "weight_cl"
     t.integer  "set_cl"
     t.integer  "rep_cl"
