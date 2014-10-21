@@ -2,8 +2,10 @@
   <%= f.error_notification %>
   <div class="highlight">
     <strong>Are you a trainer or being trained?</strong>
-    <%= link_to 'trainer', betrainer_profile_path(current_user), class: 'btn trainer' %>
-    <%= link_to 'client', beclient_profile_path(current_user), class: 'btn client' %>
+    <div class="col-xs-12">
+      <%= link_to 'trainer', betrainer_profile_path(current_user), class: 'btn trainer' %>
+      <%= link_to 'client', beclient_profile_path(current_user), class: 'btn client' %>
+     </div>
     <% if current_user.has_role? :trainer %>
       <style>.btn.trainer{border: 3px solid white; padding: -3px;}</style>
     <% else %>
