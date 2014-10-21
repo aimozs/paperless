@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<%= link_to '<', exercises_path, class:'btn btn-info' %>
+<%= link_to '<', :back, class:'btn btn-info' %>
 <%= link_to 'Edit', edit_exercise_path(@exercise), class:'btn btn-info' %>
 <p>
   <strong>Name:</strong>
@@ -11,6 +11,10 @@
   <%= @exercise.description %>
 </p>
 
-<div class="videoWrapper">
-  <iframe class="youtube" src="//www.youtube.com/embed/<%= @exercise.video %>" frameborder="0" allowfullscreen></iframe>
-</div>
+<% if @exercise.video? %>
+	<div class="videoWrapper">
+		<iframe class="youtube" src="//www.youtube.com/embed/<%= @exercise.video %>" frameborder="0" allowfullscreen></iframe>
+	</div>
+<% else %>
+	<p>no video available</p>
+<% end %>
