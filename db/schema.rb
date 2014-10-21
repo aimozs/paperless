@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141018120758) do
 
-
   create_table "exercises", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -53,11 +52,11 @@ ActiveRecord::Schema.define(version: 20141018120758) do
   create_table "programmes", force: true do |t|
     t.text     "description"
     t.date     "due_date"
-    t.string   "programme_status"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "client"
+    t.string   "programme_status"
+    t.integer  "client",           limit: 255
   end
 
   add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"
