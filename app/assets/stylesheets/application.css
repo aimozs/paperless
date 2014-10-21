@@ -5,6 +5,13 @@ a {
 	color: black !important;
 }
 
+.collapsed {
+	background-color: white !important;
+}
+
+.icon-bar {
+	background-color: black !important;
+}
 .back-button {
 	position: relative;
 	bottom: 1em;
