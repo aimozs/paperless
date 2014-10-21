@@ -33,10 +33,13 @@
         <ul class="nav navbar-nav nav nav-pills nav-stacked">
             <!-- if the signed in user is trainer, he can see a list of exercises -->
             <% if current_user.has_role? :trainer %>
-              <li><%= link_to 'Clients', profiles_path %></li>
-              <li><%= link_to 'Exercices', exercises_path %></li>
-              <li><hr></li>
-              
+              <% if current_user.has_role? :admin %>
+                <li><%= link_to 'manage users', profiles_path %></li>
+              <% else %>
+                <li><%= link_to 'Clients', profiles_path %></li>
+                <li><%= link_to 'Exercises', exercises_path %></li>
+                <li><%= link_to 'Feedback' %></li>
+              <% end %>
             <% end %>
 
             <li><%= link_to 'Programmes', programmes_path %></li>
@@ -46,15 +49,6 @@
             <% else %>
               <li><%= link_to 'Profile', new_profile_path %></li>
             <% end %>
-
-            <li><hr></li>
-            <li>
-              <% if current_user.has_role? :admin %>
-              <%= link_to 'manage users', profiles_path %>
-              <% else %>
-              <%= link_to 'Feedback' %>
-              <% end %>
-            </li>
             <li><%= link_to 'Sign out' , destroy_user_session_path, method: :delete %></li>
             <% if current_user.has_role? :admin %>
               <li><%= link_to 'become normal', lock_profile_path(current_user) %></li>

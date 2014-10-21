@@ -1,10 +1,14 @@
 a {
 	color: black !important;
 }
+
 .navbar *{
 	color: black !important;
 }
 
+.nav li {
+	margin-top: 0 !important;
+}
 .collapsed {
 	background-color: white !important;
 }

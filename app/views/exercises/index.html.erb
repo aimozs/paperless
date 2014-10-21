@@ -2,7 +2,7 @@
 <hr>
 <h1>Listing exercises</h1>
 
-<table class="table table-hover">
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -18,7 +18,7 @@
         <td><%= link_to exercise.name, exercise_path(exercise), class:'btn btn-info' %></td>
         <td><%= exercise.description %></td>
         <% if exercise.video? %>
-          <td><a href="http://www.youtube.com/watch?v=<%= exercise.video %>" target="_blank"><%= exercise.video %></a></td>
+          <td><a href="http://www.youtube.com/watch?v=<%= exercise.video %>" target="_blank"><i class="fa fa-play"></i></a></td>
         <% else %>
           <td></td>
         <% end %>
