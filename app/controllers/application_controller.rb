@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   	def after_sign_in_path_for(resource)
 		if current_user.profile
-	 		profile_path(current_user.profile)
+	 		programmes_path(current_user.profile)
 	 	else
 	 		new_profile_path
 	 	end

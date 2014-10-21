@@ -25,4 +25,9 @@ class User < ActiveRecord::Base
   def has_trainer?
     reverse_relationships.any?
   end
+
+  def my_trainer
+    reverse_relationships.first.trainer.profile
+  end
+
 end
