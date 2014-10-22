@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:unlock, :downgrade, :promote, :show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:downgrade, :promote, :show, :edit, :update, :destroy]
 
   # GET /profiles
   # GET /profiles.json
