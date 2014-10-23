@@ -64,9 +64,6 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<% if user_signed_in? %>
-  <%= link_to '<', :back, class:'btn btn-primary back-btn' %>
-<% end %>
 
 <div <% if user_signed_in? %>
       <% if current_user.has_role? :admin %>

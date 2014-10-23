@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20141018120758) do
-=======
 ActiveRecord::Schema.define(version: 20141021042813) do
->>>>>>> 8b9efa8ce6105395bb15c5fad87918b9a7beb461
 
   create_table "exercises", force: true do |t|
     t.string   "name"
@@ -95,6 +91,7 @@ ActiveRecord::Schema.define(version: 20141021042813) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "weight"
+    t.integer  "reps_cl"
     t.integer  "weight_cl"
     t.integer  "set_cl"
     t.integer  "rep_cl"

@@ -26,35 +26,43 @@
   </div>
 </div>
 
-<h3>To create a better programme next time, please fill up the stats for this exercise!</h3>
-<div>
-<%= simple_form_for(@spec) do |f| %>
-  <%= f.error_notification %>
-  <% if @spec.weight %>
-    <div class="form-group">
-      <%= f.input :weight_cl, input_html: { class: 'form-control' } %>
-    </div>
-    <% end %>
-    <div class="form-group">
-      <%= f.input :set_cl, input_html: { class: 'form-control' } %>
-    </div>
-    <div class="form-group">
-      <%= f.input :rep_cl, input_html: { class: 'form-control' } %>
-    </div>
-    <div class="form-group">
-      <%= f.input :note, input_html: { class: 'form-control' } %>
-    </div>
+<% if current_user.has_role? :client || @spec.programme.programme_status == 'completed' %>
+  <h3>To create a better programme next time, please fill up the stats for this exercise!</h3>
+  <div>
+  <%= simple_form_for(@spec) do |f| %>
+    <%= f.error_notification %>
+      
+      <% if @spec.weight %>
+        <div class="form-group">
+          <%= f.input :weight_cl, input_html: { class: 'form-control' } %>
+        </div>
+      <% end %>
+      <% if @spec.set %>
+      <div class="form-group">
+        <%= f.input :set_cl, input_html: { class: 'form-control' } %>
+      </div>
+      <% end %>
+      <% if @spec.rep %>
+      <div class="form-group">
+        <%= f.input :rep_cl, input_html: { class: 'form-control' } %>
+      </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.input :note, input_html: { class: 'form-control' } %>
+      </div>
+      
 
 
 
 
-<div class='row'>
-  <div class='col-xs-6'>
-    <%= link_to 'Cancel', @spec.programme, class:'btn btn-danger' %>
+  <div class='row'>
+    <div class='col-xs-6'>
+      <%= link_to 'Cancel', @spec.programme, class: 'btn btn-danger' %>
+    </div>
+    <div class='col-xs-6 text-right'>
+      <%= f.submit 'Submit', class: 'btn btn-success' %>
+    </div>
   </div>
-  <div class='col-xs-6 text-right'>
-    <%= f.submit 'Submit', class: 'btn btn-success' %>
-  </div>
-</div>
+  <% end %>
 <% end %>
 </div>

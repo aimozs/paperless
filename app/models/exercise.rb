@@ -6,5 +6,9 @@ class Exercise < ActiveRecord::Base
 	def self.reverse_order
     	order(created_at: :desc)
   	end
-
+  	
+	searchable do
+    text :name
+  end
+  
 end
