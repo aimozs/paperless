@@ -1,7 +1,11 @@
 * {
 	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 200;
 }
 
+h3 {
+	font-weight: 400;
+}
 .btn{
 	color: black !important;
 }
