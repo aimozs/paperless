@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   rolify
+  before_create :set_default_role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -28,6 +29,10 @@ class User < ActiveRecord::Base
 
   def my_trainer
     reverse_relationships.first.trainer.profile
+  end
+
+  def set_default_role
+    self.add_role :trainer
   end
 
 end
