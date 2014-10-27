@@ -34,11 +34,11 @@
             <!-- if the signed in user is trainer, he can see a list of exercises -->
             <% if current_user.has_role? :trainer %>
               <% if current_user.has_role? :admin %>
-                <li><%= link_to 'manage users', profiles_path, class: 'fa fa-users' %></li>
+                <li><%= link_to ' Manage users', profiles_path, class: 'fa fa-users' %></li>
               <% else %>
-                <li><%= link_to 'Clients', profiles_path, class: 'fa fa-male' %></li>
-                <li><%= link_to 'Exercises', exercises_path, class: 'fa fa-heart' %></li>
-                <li><%= link_to 'Feedback', exercises_path, class: 'fa fa-comments-o' %></li>
+                <li><%= link_to ' Clients', profiles_path, class: 'fa fa-male' %></li>
+                <li><%= link_to ' Exercises', exercises_path, class: 'fa fa-heart' %></li>
+                <li><%= link_to ' Feedback', exercises_path, class: 'fa fa-comments-o' %></li>
               <% end %>
             <% end %>
 
