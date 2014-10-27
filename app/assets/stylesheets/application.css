@@ -119,6 +119,9 @@ padding: 1em;
 margin: 1em;
 }
 
+.btn {
+	padding: 1em !important;
+}
 #sign-in {
 	background-color: yellow;
 	font-size: 2em !important;
@@ -128,6 +131,7 @@ margin: 1em;
 
 #sign-up {
 	background-color: green;
+	font-size: 2em !important;
 	color: black;
 	border-radius: 1em !important;
 }
