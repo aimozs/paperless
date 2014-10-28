@@ -46,15 +46,8 @@
             <li><a href="<%= messages_path %>">Messages<span class="badge"><%= @nummess %></span></a></li>
             <% if current_user.profile %>
               <li><%= link_to "My Profile", profile_path(current_user.profile) %></li>
-            <% else %>
-              <li><%= link_to 'Profile', new_profile_path %></li>
             <% end %>
-            <li><%= link_to 'Sign out' , destroy_user_session_path, method: :delete %></li>
-            <% if current_user.has_role? :admin %>
-              <li><%= link_to 'become normal', lock_profile_path(current_user) %></li>
-            <% else %>
-              <li><%= link_to 'become Admin', unlock_profile_path(current_user) %></li>
-            <% end %>
+            
         </ul>
       </div>
       <% else %>
@@ -64,6 +57,8 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+
+<!-- display the footer that let you know who you're signed in as -->
 <% if user_signed_in? %>
   <%= link_to '<', :back, class:'btn btn-primary back-btn' %>
 <% end %>
