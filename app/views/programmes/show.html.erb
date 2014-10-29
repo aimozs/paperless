@@ -30,22 +30,7 @@
 	<% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
 		<%= link_to 'Add Exercise', new_spec_path(programme: @programme.id), class:'btn btn-info'%>
 	
-		<%= form_tag programme_path(@programme), :method => :get do %>
-	      <p>
-	      <%= text_field_tag :search, params[:search] %>
-	      <%= submit_tag "Search", :name => nil %>
-	      </p>
 		<% end %>
-	<% end %>
-	<ul>
-	  <% @exSearch.each do |ex| %>
-	    <li><%= link_to ex.name, new_spec_path(programme: @programme.id, exercise: ex.id)  %></li>
-	  <% end %>
-	</ul>
-
-	<div id="search-wrapper">
-		<input class="typeahead" type="text" placeholder="Exercises">
-	</div>
 </div>
 <div class="col-md-6">
 <% @exercises.each do |exercise| %>

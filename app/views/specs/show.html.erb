@@ -27,7 +27,7 @@
 </div>
 
 <% if current_user.has_role? :client || @spec.programme.programme_status == 'completed' %>
-  <h3>To create a better programme next time, please fill up the stats for this exercise!</h3>
+  <h5>To create a better programme next time, please fill up the stats for this exercise!</h5>
   <div>
   <%= simple_form_for(@spec) do |f| %>
     <%= f.error_notification %>
