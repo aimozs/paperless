@@ -1,4 +1,12 @@
-a {
+* {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 200;
+}
+
+h3 {
+	font-weight: 400;
+}
+.btn{
 	color: black !important;
 }
 
@@ -50,7 +58,7 @@ a {
 	padding-right: 0;
 }
 .btn {
-	margin: 1em !important;
+	/*margin: 1em !important;*/
 }
 
 .highlight {
@@ -111,6 +119,27 @@ padding: 1em;
 margin: 1em;
 }
 
+.btn {
+	/*padding: 1em !important;*/
+
+}
+
+.navbar {
+  min-height: 40px;
+}
+
+.navbar-brand {
+  float: left;
+  height: 40px;
+  padding: 5px 5px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.menu-top {
+	text-align: center;
+	padding-top: 5px;
+
+}
 #sign-in {
 	background-color: yellow;
 	font-size: 2em !important;
@@ -120,6 +149,7 @@ margin: 1em;
 
 #sign-up {
 	background-color: green;
+	font-size: 2em !important;
 	color: black;
 	border-radius: 1em !important;
 }
