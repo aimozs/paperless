@@ -16,19 +16,21 @@
     <thead>
       <tr>
         <th>Description</th>
-        <th></th>
+        <th>Client</th>
         <th>Due date</th>
-        <th>Status</th>
+        
       </tr>
     </thead>
     <tbody>
       <% @programmes.reverse_order.each do |programme| %>
         <% if (programme.user == current_user) && (programme.programme_status == 'draft')%>
           <tr>
-            <td><%= link_to programme.description, programme %></td>
-            <td><%= programme.client %></td>
+            <td><%= link_to programme.description, programme, class: 'btn btn-primary' %></td>
+            
+            <td><%= (User.where('id = ?', programme.client)).first.profile.first_name.capitalize %></td>
+
             <td><%= programme.due_date %></td>
-            <td><%= programme.programme_status %></td>
+            
           </tr>
         <% end %>
       <% end %>

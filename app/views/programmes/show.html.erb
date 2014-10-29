@@ -1,7 +1,8 @@
 <% if notice %>
 <p id="notice" class="alert alert-success" role="alert"><%= notice %></p>
 <% end %>
-<div>
+<div class="row">
+<div class="col-md-6">
 	
 		<%= simple_form_for(@programme) do |f| %>
 			<%= f.error_notification %>
@@ -10,10 +11,8 @@
 					<div class="col-xs-6">
 						<%= link_to 'Edit', edit_programme_path(@programme), class:'btn btn-success' %>
 					</div>
-						<div class="col-xs-6">
-					      	<p class="text-right">
+						<div class="col-xs-6 text-right">
 					      	<%= link_to 'Send to client', change_status_programme_path(@programme.id), class:'btn btn-danger' %>
-					      	</p>
 				      	</div>
 				<% end %>
 				<% if ((current_user.has_role? :client) && (@programme.client == current_user.id))%>
@@ -27,41 +26,53 @@
 
 
 		
-	<h3><%= @programme.description %></h3><h5> Due date: <%= @programme.due_date %></h5>
+	<h3><%= @programme.description %></h3><h5>Due date: <%= @programme.due_date %></h5>
 	<% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
 		<%= link_to 'Add Exercise', new_spec_path(programme: @programme.id), class:'btn btn-info'%>
+	
+		<%= form_tag programme_path(@programme), :method => :get do %>
+	      <p>
+	      <%= text_field_tag :search, params[:search] %>
+	      <%= submit_tag "Search", :name => nil %>
+	      </p>
+		<% end %>
 	<% end %>
-	<table class="table">
-		<tr>
-			<th>Exercise</th>
-			<th>Weight</th>
-			<th>Sets</th>
-			<th>Reps</th>
-			<% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
-				<th>Delete?</th>
-			<% end  %>
-			<% if (current_user.has_role? :client) && (@programme.programme_status == 'assigned') %>
-				<th>Start?</th>
-			<% end %>
-		</tr>
-		<% @exercises.each do |exercise| %>
-			<tr>
-				<% if current_user.has_role? :trainer %>
-		        <td><%= link_to exercise.name, edit_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-warning' %></td>
-		        <% else %>
-		        <td><%= link_to exercise.name, '#', class:'btn btn-warning disabled' %></td>
-		        <% end %>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.weight_cl %> / <%= exercise.specs.where('programme_id = ?', @programme.id).first.weight %></td>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.set_cl %> / <%= exercise.specs.where('programme_id = ?', @programme.id).first.set %></td>
-		        <td><%= exercise.specs.where('programme_id = ?', @programme.id).first.rep_cl %> / <%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %></td>
-		        <% if (current_user.has_role? :trainer) && (@programme.programme_status == 'draft') %>
-		        <td><%= link_to 'X', remove_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-danger', data: { confirm: 'Are you sure?' } %></td>
-		        <% end %>
-		        <% if (current_user.has_role? :client) && (@programme.programme_status == 'assigned') %>
-		        <td><%= link_to '>', spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-success'%></td>
-		        <% end %>
-		    </tr>
-	    <% end %>
-    </table>
+	<ul>
+	  <% @exSearch.each do |ex| %>
+	    <li><%= link_to ex.name, new_spec_path(programme: @programme.id, exercise: ex.id)  %></li>
+	  <% end %>
+	</ul>
+
+	<div id="search-wrapper">
+		<input class="typeahead" type="text" placeholder="Exercises">
+	</div>
+</div>
+<div class="col-md-6">
+<% @exercises.each do |exercise| %>
+	<div class="panel panel-default">
+  		<div class="panel-heading">
+  		<% if current_user.has_role? :trainer %>
+		    <%= link_to exercise.name, edit_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-warning' %>
+		    <%= exercise.specs.where('programme_id = ?', @programme.id).first.time.strftime('%M') %> min
+		    <% if exercise.specs.where('programme_id = ?', @programme.id).first.set %> rest time<% end %>
+		    <%= link_to 'X', remove_spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+		<% else %>
+			<%= link_to exercise.name, '#', class:'btn btn-warning disabled' %>
+			<%= exercise.specs.where('programme_id = ?', @programme.id).first.time.strftime('%M') %> min
+		    <% if exercise.specs.where('programme_id = ?', @programme.id).first.set %> rest time<% end %>
+			<%= link_to '>', spec_path(exercise.specs.where('programme_id = ?', @programme.id).first), class:'btn btn-success'%>
+		<% end %>
+		</div>
+		<% if exercise.specs.where('programme_id = ?', @programme.id).first.set %>
+  		<div class="panel-body">
+	    	<%= exercise.specs.where('programme_id = ?', @programme.id).first.set %> sets of <%= exercise.specs.where('programme_id = ?', @programme.id).first.rep %> reps at <%= exercise.specs.where('programme_id = ?', @programme.id).first.weight %> Kg
+		
+		
+  		</div>
+  		<% end %>
+	</div>
+<% end %>
+
+</div>
 </div>
 

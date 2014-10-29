@@ -6,4 +6,6 @@ class Message < ActiveRecord::Base
     	order(created_at: :desc)
   	end
 
+  	
+
 end

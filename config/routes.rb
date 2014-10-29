@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+  
+
   resources :messages
+  resources :exercises
+  resources :relationships, only: [:index, :create, :destroy]
 
   resources :specs do
     member do
       get :remove
     end
   end
-
-  resources :exercises
 
   resources :programmes do
     member do
@@ -27,7 +29,6 @@ Rails.application.routes.draw do
   end
 
   devise_for :users 
-
   resources :users do
     member do
       get :training
@@ -35,18 +36,13 @@ Rails.application.routes.draw do
     end
   end
 
-  
-
-resources :relationships, only: [:index, :create, :destroy]
-
-  # get 'home/index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'home#index'
   get '/review' => 'home#review'
+  get '/search/query' => 'search#query'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

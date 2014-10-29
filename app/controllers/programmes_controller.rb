@@ -6,12 +6,21 @@ class ProgrammesController < ApplicationController
   def index
     @programmes = Programme.all
     @users = User.all
+
   end
 
   # GET /programmes/1
   # GET /programmes/1.json
   def show
     @exercises = @programme.exercises
+    if params[:search]
+      @search = Exercise.search do
+        fulltext params[:search]
+      end
+      @exSearch = @search.results
+    else
+    @exSearch = Exercise.all
+   end
   end
 
   def change_status
@@ -19,6 +28,7 @@ class ProgrammesController < ApplicationController
     # @programme.user = params[:client]
     if @programme.programme_status == 'draft'
       @programme.update_attribute('programme_status', 'assigned')
+      DeliveryNotificationMailer.notify(@programme).deliver
       redirect_to :programmes
     else
       @programme.update_attribute('programme_status', 'completed')
@@ -46,6 +56,7 @@ class ProgrammesController < ApplicationController
     @programme = Programme.new(programme_params)
     @programme.user = current_user
     @programme.programme_status = 'draft'
+
 
     respond_to do |format|
       if @programme.save

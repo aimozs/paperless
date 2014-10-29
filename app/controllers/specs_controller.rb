@@ -23,9 +23,12 @@ class SpecsController < ApplicationController
     @spec = Spec.new
     if params[:programme]
       @programme_id = params[:programme]
+      @programme = Programme.find(@programme_id)
     else
       redirect_to :back
     end
+
+    
   end
 
   # GET /specs/1/edit
@@ -77,6 +80,7 @@ class SpecsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_spec
       @spec = Spec.find(params[:id])
+      @programme = @spec.programme
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

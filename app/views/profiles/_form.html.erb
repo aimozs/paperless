@@ -1,5 +1,6 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
+
     <% if current_user.has_role? :trainer %>
       <style>.btn.trainer{border: 3px solid white; padding: -3px;}</style>
     <% else %>

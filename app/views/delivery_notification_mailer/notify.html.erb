@@ -1,5 +1,24 @@
-<h1>DeliveryNotificationMailer#notify</h1>
+<h1>Paperless.PT</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/delivery_notification_mailer/notify.html.erb
+  <%= @greeting + ' ' + @client.profile.first_name.capitalize %>,<br>
+  <br>
+  we're sending you that notification so you're aware that you've been assigned a new programme!<br>
+</p>
+
+<% if @programme.description %>
+	<div class="panel panel-default">
+    <div class="panel-heading">Here's the message</div>
+    <div class="panel-body">
+      <%= @programme.description%>
+    </div>
+  </div>
+<% end %>
+
+<p>
+  Let's get things done and complete your programme today, you can sign-in at <a href='google.com' class='btn btn-success'>Myopt</a><br>
+</p>
+<p>
+  Cheers<br>
+  Your Paperless PT <%= @client.trainers.first.profile.first_name.capitalize %><br>
 </p>

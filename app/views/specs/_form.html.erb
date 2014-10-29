@@ -1,4 +1,6 @@
+  
 
+  
 
 <%= simple_form_for(@spec) do |f| %>
   <%= f.error_notification %>
@@ -6,10 +8,10 @@
       <%= f.association :exercise, input_html: { class: 'form-control' }, prompt: 'Select an exercise' %>
     </div>
   	<div class="form-group">
-    	<%= f.input :weight, input_html: { class: 'form-control' } %>
+    	<%= f.input :weight %>
   	</div>
     <div class="form-group">
-      <%= f.input :set, input_html: { class: 'form-control' } %>
+      <%= f.input :set %>
     </div>
   	<div class="form-group">
     	<%= f.input :rep, input_html: { class: 'form-control' } %>
@@ -20,6 +22,7 @@
     <div class="form-group">
       <%= f.input :time, discard_hour: true, input_html: { class: 'form-control' }, default: Time.parse('0:01') %>
     </div>
+    <% if @programme.programme_status != 'draft' %>
     <div class="panel panel-default">
       <div class="panel-heading">Recap for this exercise</div>
       <div class="panel-body">
@@ -30,6 +33,8 @@
         <%= @spec.note %>
       </div>
     </div>
+    <% end %>
+    
 
   	<% if @programme_id %>
       <%= f.input :programme_id, as: :hidden, input_html: { value: @programme_id } %>
