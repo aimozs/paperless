@@ -1,5 +1,6 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
+<!-- <<<<<<< HEAD
 
     <% if current_user.has_role? :trainer %>
       <style>.btn.trainer{border: 3px solid white; padding: -3px;}</style>
@@ -7,6 +8,8 @@
       <style>.btn.client{border: 3px solid white; padding: -3px;}</style>
     <% end %>
   </div>
+=======
+>>>>>>> lab -->
   <div class="col-md-6">
   	<div class="form-group">
     	<%= f.input :first_name, input_html: { class: 'form-control' } %>

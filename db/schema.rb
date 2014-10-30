@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021042813) do
+ActiveRecord::Schema.define(version: 20141030053841) do
+
+  create_table "clients", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "trainer"
+  end
+
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id"
 
   create_table "exercises", force: true do |t|
     t.string   "name"
@@ -52,11 +62,11 @@ ActiveRecord::Schema.define(version: 20141021042813) do
   create_table "programmes", force: true do |t|
     t.text     "description"
     t.date     "due_date"
+    t.string   "programme_status"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "programme_status"
-    t.integer  "client",           limit: 255
+    t.integer  "client"
   end
 
   add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"
@@ -91,7 +101,6 @@ ActiveRecord::Schema.define(version: 20141021042813) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "weight"
-    t.integer  "reps_cl"
     t.integer  "weight_cl"
     t.integer  "set_cl"
     t.integer  "rep_cl"
@@ -103,7 +112,7 @@ ActiveRecord::Schema.define(version: 20141021042813) do
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -114,9 +123,20 @@ ActiveRecord::Schema.define(version: 20141021042813) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count"
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "users_roles", id: false, force: true do |t|

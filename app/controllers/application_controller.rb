@@ -5,13 +5,18 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :nummess
 
   	def after_sign_in_path_for(resource)
+  		# if the user has a profile
 		if current_user.profile
+			# check if the user has a trainer and has agreed to their engagement agreement
 			if current_user.has_trainer? && current_user.profile.agreed?
+				# go to the list of their programmes
 	 			programmes_path(current_user.profile)
 	 		else
+	 			# edit their profile, so that they can agree to the engagement agreement
 	 			edit_profile_path(current_user.profile)
 	 		end
 	 	else
+	 		# if they don't have a profile, get them to set up a new profile
 	 		new_profile_path
 	 	end
 	end
