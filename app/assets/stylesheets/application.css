@@ -160,10 +160,7 @@ margin: 1em;
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
 
-.splash-image {
-	width: 80%;
-	margin-top: 0 !important;
-}
+
 
 }
 
@@ -174,18 +171,13 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px)
 and (min-width : 1224px) {
 
-.splash-image {
-	width: 80%;
-	margin-top: 0 !important;
-}
+
 
 }
 
 /* Desktops and laptops ----------- */
 @media only screen 
 and (max-width : 1024px) {
-.splash-image {
-	width: 80%;
-	margin-top: 0 !important;
-}
+
+
 }

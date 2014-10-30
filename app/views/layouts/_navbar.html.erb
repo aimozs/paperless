@@ -44,3 +44,10 @@
     <% end %>
   </div>
 </nav>
+
+<% if user_signed_in? && current_user.profile %>
+<div class="bottom-bar">
+Signed in as <%= current_user.profile.first_name %>
+<%= link_to 'sign out', destroy_user_session_path, method: :delete %>
+</div>
+<% end %>
