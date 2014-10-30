@@ -1,17 +1,5 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
-  <div class="highlight">
-    <strong>Are you a trainer or being trained?</strong>
-    <div class="col-xs-12">
-      <%= link_to 'trainer', betrainer_profile_path(current_user), class: 'btn trainer' %>
-      <%= link_to 'client', beclient_profile_path(current_user), class: 'btn client' %>
-     </div>
-    <% if current_user.has_role? :trainer %>
-      <style>.btn.trainer{border: 3px solid white; padding: -3px;}</style>
-    <% else %>
-      <style>.btn.client{border: 3px solid white; padding: -3px;}</style>
-    <% end %>
-  </div>
   <div class="col-md-6">
   	<div class="form-group">
     	<%= f.input :first_name, input_html: { class: 'form-control' } %>

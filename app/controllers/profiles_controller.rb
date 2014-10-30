@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
+    @client = Client.new
   end
 
   # GET /profiles/1
@@ -63,9 +64,12 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user = current_user
-
     respond_to do |format|
       if @profile.save
+      if Client.find_by(email: current_user.email)
+          @client = Client.find_by(email: current_user.email)
+          current_user.reverse_relationships.create(trainer_id: @client.trainer)
+      end
         format.html { redirect_to programmes_path, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
