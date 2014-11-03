@@ -5,11 +5,5 @@ class Profile < ActiveRecord::Base
     order(created_at: :desc)
   end
 
-  	after_create :make_client
-
-  	def make_client
-		self.user.add_role :client
-	end
-
 	
 end

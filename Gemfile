@@ -6,6 +6,7 @@ ruby '2.1.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 gem 'devise'
+gem 'devise_invitable', '~> 1.3.4'
 
 gem 'rolify'
 gem 'cancan'

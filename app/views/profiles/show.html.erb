@@ -77,7 +77,7 @@
 
 <!-- button to let a trainer enroll a client -->
 <% if (current_user.has_role? :trainer) && (@profile.user != current_user) && (!current_user.training?(@profile.user))%>
-    <%= form_for(current_user.relationships.build(client_id: @profile.user.id)) do |f| %>
+<%= form_for(current_user.relationships.build(client_id: @profile.user.id)) do |f| %>
       <div><%= f.hidden_field :client_id %></div>
       <%= f.submit "Enroll " + @profile.first_name.capitalize, class: "btn btn-large btn-success" %>
     <% end %>

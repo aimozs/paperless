@@ -1,12 +1,6 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
 
-    <% if current_user.has_role? :trainer %>
-      <style>.btn.trainer{border: 3px solid white; padding: -3px;}</style>
-    <% else %>
-      <style>.btn.client{border: 3px solid white; padding: -3px;}</style>
-    <% end %>
-  </div>
   <div class="col-md-6">
   	<div class="form-group">
     	<%= f.input :first_name, input_html: { class: 'form-control' } %>
@@ -54,7 +48,7 @@
   </div>
   <div class="col-md-12">
     <div class="form-group">
-      <%= f.submit 'Submit', class: 'btn btn-default' %> or <%= link_to 'Back to Programmes', programmes_path, class:'btn btn-primary' %>
+      <%= f.submit 'Submit', class: 'btn btn-default' %>
     </div>
   </div>
 <% end %>
