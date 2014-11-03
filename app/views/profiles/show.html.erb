@@ -4,7 +4,7 @@
 <% if !current_user.has_role? :trainer %>
   <div class="highlight">
     <% if current_user.has_trainer?  && (current_user.has_role? :client) %>
-      Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %>
+      Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %><% @rel.each do |rel| %><%= link_to 'Fire', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %><% end %>
     <% elsif current_user.has_role? :client %>
       You currently don't have a trainer.
     <% end %>

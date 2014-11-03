@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-
+    @rel = Relationship.where('client_id = ?', current_user)
   end
 
   # GET /profiles/new

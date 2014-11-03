@@ -16,7 +16,7 @@ class RelationshipsController < ApplicationController
   def destroy
     @relationship.destroy
     respond_to do |format|
-      format.html { redirect_to relationships_path, notice: 'Message was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
