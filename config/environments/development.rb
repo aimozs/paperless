@@ -36,14 +36,15 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.assets.raise_runtime_errors = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-config.action_mailer.smtp_settings = {
-  address:              'smtp.gmail.com',
-  port:                 587,
-  domain:               'thecoderfactory.com',
-  user_name:            'matt@thecoderfactory.com',
-  password:             'lxczhwlxczhw5',
-  authentication:       'plain',
-  enable_starttls_auto: true  }
-config.default_url_options = { :host => 'localhost:3000'}
+  config.default_url_options = { :host => 'localhost:3000'}
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'thecoderfactory.com',
+    user_name:            'matt@thecoderfactory.com',
+    password:             'lxczhwlxczhw5',
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 
 end

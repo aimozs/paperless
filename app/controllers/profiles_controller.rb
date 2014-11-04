@@ -44,12 +44,17 @@ class ProfilesController < ApplicationController
     @profile.user = current_user
     respond_to do |format|
       if @profile.save
-      if Client.find_by(email: current_user.email)
-          @client = Client.find_by(email: current_user.email)
-          current_user.reverse_relationships.create(trainer_id: @client.trainer)
-          @client.destroy
+      if Client.find_by(email: current_user.email) # if the client is in the list of enrollment invitations
+          @client = Client.find_by(email: current_user.email) # find them in the list
+          current_user.reverse_relationships.create(trainer_id: @client.trainer) # create a relationship between them and the corresponding trainer ID
+          @client.destroy # destroy the record from the list of invites, because their invitation process is complete
       end
+      if current_user.has_role? :client # if they're a client fo to their programmes
         format.html { redirect_to programmes_path, notice: 'Profile was successfully created.' }
+      else
+          # if they're a trainer go to the list of clients
+        format.html { redirect_to profiles_path, notice: 'Profile was successfully created.' }
+      end
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
