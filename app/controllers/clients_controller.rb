@@ -1,5 +1,10 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :block_page, only: [:show, :index, :edit]
+
+  def block_page
+    redirect_to root_path
+  end
 
   # GET /clients
   # GET /clients.json
