@@ -29,7 +29,10 @@ ActiveRecord::Schema.define(version: 20141030053841) do
     t.string   "video"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "exercises", ["user_id"], name: "index_exercises_on_user_id"
 
   create_table "messages", force: true do |t|
     t.text     "content"
@@ -62,11 +65,12 @@ ActiveRecord::Schema.define(version: 20141030053841) do
   create_table "programmes", force: true do |t|
     t.text     "description"
     t.date     "due_date"
-    t.string   "programme_status"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "client"
+    t.string   "programme_status"
+    t.integer  "client",           limit: 255
+    t.integer  "week"
   end
 
   add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"
@@ -101,6 +105,7 @@ ActiveRecord::Schema.define(version: 20141030053841) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "weight"
+    t.integer  "reps_cl"
     t.integer  "weight_cl"
     t.integer  "set_cl"
     t.integer  "rep_cl"

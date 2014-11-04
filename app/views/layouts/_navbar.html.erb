@@ -19,25 +19,25 @@
       <% if user_signed_in? %>
       <div class="row menu-top">
         <div class="col-xs-2 hidden-xs hidden-sm navbar-brand"><%= link_to 'Paperless.PT', root_path %></div>
-        <div class="col-xs-2 hidden-md hidden-lg btn btn-default"><%= link_to ' ', root_path, class: 'fa fa-home' %></div>
+        <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', root_path, class: 'fa fa-home btn btn-default' %></div>
         <% if current_user.has_role? :trainer %>
-          <div class="col-xs-2 hidden-xs hidden-sm btn btn-default"><%= link_to ' Clients', profiles_path, class: 'fa fa-male' %></div>
-          <div class="col-xs-2 hidden-md hidden-lg btn btn-default"><%= link_to ' ', profiles_path, class: 'fa fa-male' %></div>
+          <div class="col-xs-2 hidden-xs hidden-sm"><%= link_to ' Clients', profiles_path, class: 'fa fa-male btn btn-default' %></div>
+          <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', profiles_path, class: 'fa fa-male btn btn-default' %></div>
 
 
-          <div class="col-xs-2 hidden-xs hidden-sm btn btn-default"><%= link_to ' Exercises', exercises_path, class: 'fa fa-heart' %></div>
-          <div class="col-xs-2 hidden-md hidden-lg btn btn-default"><%= link_to ' ', exercises_path, class: 'fa fa-heart' %></div>
+          <div class="col-xs-2 hidden-xs hidden-sm"><%= link_to ' Exercises', exercises_path, class: 'fa fa-heart btn btn-default' %></div>
+          <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', exercises_path, class: 'fa fa-heart btn btn-default' %></div>
         <% end %>
 
-        <div class="col-xs-2 hidden-xs hidden-sm btn btn-default"><%= link_to ' Programmes', programmes_path, class: 'fa fa-list-ul' %></div>
-        <div class="col-xs-2 hidden-md hidden-lg btn btn-default"><%= link_to ' ', programmes_path, class: 'fa fa-list-ul' %></div>
-        <div class="col-xs-2 hidden-xs hidden-sm btn btn-default"><a class="glyphicon glyphicon-envelope" href="<%= messages_path %>"> Messages<span class="badge"><%= @nummess %></span></a></li></div>
-        <div class="col-xs-2 hidden-md hidden-lg btn btn-default"><a class="glyphicon glyphicon-envelope" href="<%= messages_path %>"> <span class="badge"><%= @nummess %></span></a></li></div>
+        <div class="col-xs-2 hidden-xs hidden-sm"><%= link_to ' Programmes', programmes_path, class: 'fa fa-list-ul btn btn-default' %></div>
+        <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', programmes_path, class: 'fa fa-list-ul btn btn-default' %></div>
+        <div class="col-xs-2 hidden-xs hidden-sm"><a class="glyphicon glyphicon-envelope btn btn-default" href="<%= messages_path %>"> Messages<span class="badge"><%= @nummess %></span></a></li></div>
+        <div class="col-xs-2 hidden-md hidden-lg"><a class="glyphicon glyphicon-envelope btn btn-default" href="<%= messages_path %>"> <span class="badge"><%= @nummess %></span></a></li></div>
 
 
         <% if current_user.profile %>
-          <div class="col-xs-2 hidden-xs hidden-sm btn btn-default"><a class="fa fa-user" href="<%= profile_path(current_user.profile) %>"> MyProfile</a></div>
-          <div class="col-xs-2 hidden-md hidden-lg btn btn-default"><a class="fa fa-user" href="<%= profile_path(current_user.profile) %>"> </a></div>
+          <div class="col-xs-2 hidden-xs hidden-sm"><a class="fa fa-user btn btn-default" href="<%= profile_path(current_user.profile) %>"> MyProfile</a></div>
+          <div class="col-xs-2 hidden-md hidden-lg"><a class="fa fa-user btn btn-default" href="<%= profile_path(current_user.profile) %>"> </a></div>
         <% end %>
       </div>
     
