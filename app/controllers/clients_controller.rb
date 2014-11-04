@@ -30,7 +30,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.save
         
-        @newuser = User.invite!({:email => @client.email}, current_user)
+        User.invite!({:email => @client.email}, current_user)
         
         format.html { redirect_to :back, notification: 'Invitation sent.' }
         format.json { render :show, status: :created, location: @client }
