@@ -6,55 +6,51 @@
 </div>
 <% end %>
 
-<h1>Listing of your clients</h1>
+<% if current_user.training?(@profiles) %>
+  <h1>Listing of your clients</h1>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Email</th>
-    </tr>
-  </thead>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @profiles.each do |profile| %>
-      <% if current_user.training?(profile.user) %>
-        <tr>
-          <td><%= link_to profile.first_name.capitalize, profile %></td>
-          <td><%= profile.user.email %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-
-<h1>Clients with no PTs</h1>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @profiles.each do |profile| %>
-      <% if (profile.user.has_role? :client) && (!profile.user.has_trainer?) && (current_user != profile.user) %>
-        <% if profile.user.has_role? :admin %>
-          <tr class="admin">
-        <% elsif profile.user.has_role? :trainer %>
-          <tr class="trainer">
-        <% else %>
-          <tr class="client">
+    <tbody>
+      <% @profiles.each do |profile| %>
+        <% if current_user.training?(profile.user) %>
+          <tr>
+            <td><%= link_to profile.first_name.capitalize, profile %></td>
+            <td><%= profile.user.email %></td>
+          </tr>
         <% end %>
-          <td><%= link_to profile.first_name.capitalize, profile %></td>
-          <td><%= profile.user.email %></td>
-        </tr>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>
+
+<% if Client.find_by(trainer: current_user.id) %>
+ <h1>Enrollments pending</h1>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Date sent</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @pending.each do |pending| %>
+          <tr>
+            <td><%= pending.created_at %></td>
+            <td><%= pending.email %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
 
 
 <% if current_user.has_role? :admin %>

@@ -44,8 +44,4 @@ class User < ActiveRecord::Base
     reverse_relationships.first.trainer.profile
   end
 
-  def set_default_role
-    self.add_role :trainer
-  end
-
 end

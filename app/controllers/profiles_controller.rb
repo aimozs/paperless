@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   def index
     @profiles = Profile.all
     @client = Client.new
+    @pending = Client.where(trainer: current_user.id)
   end
 
   # GET /profiles/1
@@ -46,6 +47,7 @@ class ProfilesController < ApplicationController
       if Client.find_by(email: current_user.email)
           @client = Client.find_by(email: current_user.email)
           current_user.reverse_relationships.create(trainer_id: @client.trainer)
+          @client.destroy
       end
         format.html { redirect_to programmes_path, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }

@@ -14,7 +14,7 @@ en:
         submit_button: "Set my password"
     mailer:
       invitation_instructions:
-        subject: 'Invitation instructions'
+        subject: 'Invitation from your trainer'
         hello: 'Hello %{email}'
         someone_invited_you: 'Your tainer has invited you to PaperlessPT, you can accept it through the link below.'
         accept: 'Accept invitation'
