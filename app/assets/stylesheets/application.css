@@ -63,6 +63,7 @@ h3 {
 	font-size: 1em;
 	padding: 1em;
 	z-index: 3;
+	background-color: black;
 }
 
 #user_remember_me{
