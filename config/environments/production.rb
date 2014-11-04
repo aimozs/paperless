@@ -89,8 +89,8 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'thecoderfactory.com',
-    user_name:            '',
-    password:             '',
+    user_name:            'matt@thecoderfactory.com',
+    password:             'lxczhwlxczhw5',
     authentication:       'plain',
     enable_starttls_auto: true
   }
