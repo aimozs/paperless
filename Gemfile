@@ -15,13 +15,14 @@ gem 'simple_form'
 gem 'nested_form'
 
 gem 'sunspot_rails'
-gem 'sunspot_solr'
-
+group :development, :test do
+	gem 'sqlite3'
+	gem 'sunspot_solr'
+end
 gem 'therubyracer'
 
 gem 'twitter-typeahead-rails'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :development
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 # Use SCSS for stylesheets

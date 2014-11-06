@@ -4,7 +4,16 @@ class ExercisesController < ApplicationController
   # GET /exercises
   # GET /exercises.json
   def index
+
+    if params[:search]
+    @search = Exercise.search do
+      fulltext params[:search]
+    end
+    @exercises = @search.results
+   else
     @exercises = Exercise.where('user_id = ?', current_user)
+   end
+    
   end
 
   # GET /exercises/1
