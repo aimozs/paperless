@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
   # GET /exercises
   # GET /exercises.json
   def index
-    @exercises = Exercise.where('name = ?', "%#{params[:term]}")
+    @exercises = Exercise.where('user_id = ?', current_user)
   end
 
   # GET /exercises/1
@@ -26,6 +26,7 @@ class ExercisesController < ApplicationController
   # POST /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
+    @exercise.user_id = current_user.id
 
     respond_to do |format|
       if @exercise.save

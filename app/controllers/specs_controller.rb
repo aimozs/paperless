@@ -20,6 +20,7 @@ class SpecsController < ApplicationController
 
   # GET /specs/new
   def new
+    @myexercises = Exercise.where('user_id = ?', current_user)
     @spec = Spec.new
     if params[:programme]
       @programme_id = params[:programme]
