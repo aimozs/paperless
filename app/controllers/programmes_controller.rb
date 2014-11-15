@@ -42,8 +42,6 @@ class ProgrammesController < ApplicationController
   # GET /programmes/new
   def new
     @programme = Programme.new
-    @exercises = Exercise.all
-    @users = User.all
   end
 
   # GET /programmes/1/edit
