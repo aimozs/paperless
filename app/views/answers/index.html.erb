@@ -1,7 +1,8 @@
-<h1>Please answer these question from your PT:</h1>
+<h1>Please answer these questions from your PT:</h1>
 <ol>
     <% @questions.each do |question| %>
         <li><%= question.content %></li>
+        <i><%= link_to 'Click to answer', new_answer_path(:question_id => question) %></i>
     <% end %>
 </ol>
 <br>

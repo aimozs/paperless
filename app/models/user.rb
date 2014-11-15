@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 	has_many :trainers, through: :reverse_relationships
 
   def set_default_role
-    if Client.find_by(email: email)
+    if @client = Client.find_by(email: email)
       self.add_role :client
       self.remove_role :trainer
     else

@@ -4,7 +4,7 @@
 <% if current_user.has_role? :client %>
   <div class="highlight">
     <% if current_user.has_trainer?  && (current_user.has_role? :client) %>
-      Your trainer is: <%= current_user.my_trainer.profile.first_name + ' ' + current_user.my_trainer.profile.last_name %><% @rel.each do |rel| %><%= link_to 'Fire', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %><% end %>
+      Your trainer is: <%= current_user.my_trainer.profile.first_name + ' ' + current_user.my_trainer.profile.last_name %><% @rel.each do |rel| %><!--#link_to 'Fire', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' -- this could cause issues, because a client without a trainer can't do anything and must be able to be enrolled by another trainer -- they'll have to delete their profile completely for this to work properly --><% end %>
     <% elsif current_user.has_role? :client %>
       You currently don't have a trainer.
     <% end %>
@@ -72,7 +72,7 @@
                   <i><%= link_to 'Click to answer', new_answer_path(:question_id => q) %></i>
                 <% else %>
                   <% @answers.where(question: q).each do |ans| %>
-                    <i><%= ans.content %></i>
+                    <i><%= ans.content %></i> <%= link_to 'change answer', answers_path, class: 'btn btn-warning' %>
                   <% end %>
                 <% end %>
             </li>

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   	def restrict_users
   		if user_signed_in?
   			if current_user.has_role? :client
-  				if current_user.profile.agreed == false
+  				if current_user.profile.agreed == nil
   					redirect_to edit_profile_path(current_user.profile)
   				end
   			end
