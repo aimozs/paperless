@@ -1,0 +1,14 @@
+<h1>Your questions</h1>
+
+    <% @questions.each do |question| %>
+      
+        <%= question.content %>
+        <%= link_to 'Edit', edit_question_path(question), class: 'btn btn-warning' %>
+        <%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %><br>
+
+    <% end %>
+
+<br>
+
+<%= link_to 'New Question', new_question_path, class: 'btn btn-success' %>
+<%= link_to 'Done!', profiles_path, class: 'btn btn-info' %>

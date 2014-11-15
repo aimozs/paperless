@@ -1,10 +1,10 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
 <div class="col-md-6">
-<% if !current_user.has_role? :trainer %>
+<% if current_user.has_role? :client %>
   <div class="highlight">
     <% if current_user.has_trainer?  && (current_user.has_role? :client) %>
-      Your trainer is: <%= current_user.my_trainer.first_name + ' ' + current_user.my_trainer.last_name %><% @rel.each do |rel| %><%= link_to 'Fire', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %><% end %>
+      Your trainer is: <%= current_user.my_trainer.profile.first_name + ' ' + current_user.my_trainer.profile.last_name %><% @rel.each do |rel| %><%= link_to 'Fire', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %><% end %>
     <% elsif current_user.has_role? :client %>
       You currently don't have a trainer.
     <% end %>
@@ -20,39 +20,6 @@
   <strong>Last name:</strong>
   <%= @profile.last_name %>
 </p>
-<% if current_user.has_role? :client %>
-<p>
-  <strong>Gender:</strong>
-  <%= @profile.gender %>
-</p>
-<p>
-  <strong>Dob:</strong>
-  <%= @profile.dob %>
-</p>
-
-<p>
-  <strong>Height:</strong>
-  <%= @profile.height %>
-</p>
-
-<p>
-  <strong>Weight:</strong>
-  <%= @profile.weight %>
-</p>
-<p>
-  <strong>Bodyfat:</strong>
-  <%= @profile.bodyfat %>
-</p>
-<p>
-  <strong>Injuries:</strong>
-  <%= @profile.injuries %>
-</p>
-<% elsif current_user.has_role? :trainer %>
-<p>
-  <strong>Engagement agreement:</strong>
-  <%= @profile.engagement %>
-</p>
-<% end %>
 <p>
   <strong>Social:</strong>
   <%= @profile.social %>
@@ -62,26 +29,120 @@
   <strong>Email:</strong>
   <%= @profile.user.email %>
 </p>
-<% if current_user == @profile.user %>
-  <h2><%= link_to 'Edit your profile', edit_profile_path(@profile), class:'btn btn-default' %></h2>
+<% if current_user.has_role? :client %>
+  <p>
+    <strong>Gender:</strong>
+    <%= @profile.gender %>
+  </p>
+  <p>
+    <strong>Dob:</strong>
+    <%= @profile.dob %>
+  </p>
+
+  <p>
+    <strong>Height:</strong>
+    <%= @profile.height %>
+  </p>
+
+  <p>
+    <strong>Weight:</strong>
+    <%= @profile.weight %>
+  </p>
+  <p>
+    <strong>Bodyfat:</strong>
+    <%= @profile.bodyfat %>
+  </p>
+  <p>
+    <strong>Injuries:</strong>
+    <%= @profile.injuries %>
+  </p>
+  
+  <% if current_user.has_trainer? && (current_user.has_role? :client) %>
+    <p>
+      <strong>Engagement agreement:</strong>
+      <%= current_user.my_trainer.profile.engagement %>
+    </p>
+    <p>
+      <strong>Induction questions:</strong>
+        <ol>
+          <% @questions.where(user: @profile.user.my_trainer).each do |q| %><!-- display the questions that were made by this profile's user's trainer -->
+            <li>
+                <%= q.content %>
+                <% if !q.answers.where(user: @profile.user).any? %> <!-- if this profile's user hasn't answered this question, display 'unanswered' -->
+                  <i><%= link_to 'Click to answer', new_answer_path(:question => q) %></i>
+                <% else %>
+                  <i><%= q.answers.where(user: @profile.user).content %></i>
+                <% end %>
+            </li>
+          <% end %>
+      </ol>
+    </p>
+  <% end %>
+
+<% elsif current_user.has_role? :trainer %> <!-- if it's a trainer viewing a profile -->
+  <% if @profile.user == current_user %> <!-- and they're viewing their own profile -->
+    <p>
+      <strong>Engagement agreement:</strong>
+      <%= @profile.engagement %>
+    </p>
+    <ol>
+      These are your induction questions:
+        <% @questions.each do |q| %>
+          <li><%= q.content %></li>
+        <% end %>
+    </ol>
+  <% else %><!-- otherwise they must be viewing a client's profile -->
+    <p>
+      <strong>Gender:</strong>
+      <%= @profile.gender %>
+    </p>
+    <p>
+      <strong>Dob:</strong>
+      <%= @profile.dob %>
+    </p>
+
+    <p>
+      <strong>Height:</strong>
+      <%= @profile.height %>
+    </p>
+
+    <p>
+      <strong>Weight:</strong>
+      <%= @profile.weight %>
+    </p>
+    <p>
+      <strong>Bodyfat:</strong>
+      <%= @profile.bodyfat %>
+    </p>
+    <p>
+      <strong>Injuries:</strong>
+      <%= @profile.injuries %>
+    </p>
+    <p>
+      <strong>Agreed to engagement?</strong>
+      <%= @profile.agreed %>
+    </p>
+    <p>
+      <strong>Induction answers:</strong>
+      <ol>
+          <% @questions.each do |q| %>
+            <li>
+                <%= q.content %>
+                <% if !q.answers.where(user: @profile.user).any? %> <!-- if this user hasn't answered this question, display 'unanswered' -->
+                  <i>Unanswered</i>
+                <% else %>
+                  <i><%= q.answers.where(user: @profile.user).content %></i>
+                <% end %>
+            </li>
+          <% end %>
+      </ol>
+    </p>
+  <% end %>
 <% end %>
+
 </div>
 
-<% if current_user.has_trainer? && (current_user.has_role? :client) %>
-<div class="col-md-6">
-  <strong>Engagement agreement:</strong>
-  <%= current_user.my_trainer.engagement %>
-</div>
-<% end %>
 
-
-<!-- button to let a trainer enroll a client -->
-<% if (current_user.has_role? :trainer) && (@profile.user != current_user) && (!current_user.training?(@profile.user))%>
-<%= form_for(current_user.relationships.build(client_id: @profile.user.id)) do |f| %>
-      <div><%= f.hidden_field :client_id %></div>
-      <%= f.submit "Enroll " + @profile.first_name.capitalize, class: "btn btn-large btn-success" %>
-    <% end %>
-<% end %>
 
 
 <!-- display a button that let an admin switch a client to PT and vice-versa -->
@@ -96,6 +157,10 @@
 <% end %>
 
 <% if @profile == current_user.profile %>
-<!-- button that let a user sign out -->
-<%= link_to 'Sign out' , destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+  <% if current_user.has_role? :trainer %>
+    <%= link_to 'Edit your induction questions', questions_path, class:'btn btn-default' %>
+  <% end %>
+  <%= link_to 'Edit your profile', edit_profile_path(@profile), class:'btn btn-default' %>
+  <!-- button that let a user sign out -->
+  <%= link_to 'Sign out' , destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
 <% end %>

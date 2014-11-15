@@ -30,15 +30,19 @@
     <div class="form-group">
       <%= f.input :injuries, input_html: { class: 'form-control' } %>
     </div>
-  </div>
-  <div class="col-md-6">
-    <% if current_user.has_trainer? %>
+    <% if current_user.has_role? :client %>
       <strong>Engagement agreement:</strong>
-      <%= current_user.my_trainer.engagement %>
+      <%= current_user.my_trainer.profile.engagement %>
       <div class="form-group">
         <%= f.input :agreed, input_html: { class: 'form-control' } %>
-      </div>
+      </div><br><br>
+      <% @questions.each do |q| %>
+        <%= q.content %>
+        <%= q.answer.content %>
+      <% end %>
     <% end %>
+  </div>
+  <div class="col-md-6">
   <% elsif current_user.has_role? :trainer %>
       <div class="form-group">
         <%= f.input :engagement, input_html: { class: 'form-control' } %>
@@ -48,7 +52,7 @@
   </div>
   <div class="col-md-12">
     <div class="form-group">
-      <%= f.submit 'Submit', class: 'btn btn-default' %>
+      <%= f.submit 'Done!', class: 'btn btn-info' %>
     </div>
   </div>
 <% end %>

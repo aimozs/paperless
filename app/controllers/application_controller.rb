@@ -3,6 +3,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :authenticate_user!, :nummess
+  before_action :restrict_users, only: [:index, :show] #stop users from going to index or show pages until they meet criteria
+
+  	def restrict_users
+  		if user_signed_in?
+  			if current_user.has_role? :client
+  				if current_user.profile.agreed == false
+  					redirect_to edit_profile_path(current_user.profile)
+  				end
+  			end
+
+  		end
+
+  	end
 
   	def after_sign_in_path_for(resource)
   		# if the user has a profile

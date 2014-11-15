@@ -8,12 +8,11 @@
     	<div class="form-group">
       	<%= f.input :description, input_html: { class: 'form-control' } %>
     	</div>
-      <h3>You need to copy just this bit!</h3>
-      <%= image_tag 'youtube_link.png' %>
     	<div class="form-group">
-      	<%= f.input :video, input_html: { class: 'form-control' } %>
+      	<%= f.input :video, label: 'YouTube video', input_html: { class: 'form-control' } %>
     	</div>
-
+      Just copy this part of the YouTube link:
+      <%= image_tag 'youtube_link.png' %>
   <div class="form-group">
     <%= f.submit 'Submit', class: 'btn btn-info' %>
   </div>

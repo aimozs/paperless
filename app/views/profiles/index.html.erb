@@ -6,7 +6,7 @@
 </div>
 <% end %>
 
-<% if current_user.training?(@profiles) %>
+<% if @rel.any? %>
   <h1>Listing of your clients</h1>
 
   <table class="table table-hover">

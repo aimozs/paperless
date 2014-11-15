@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030053841) do
+ActiveRecord::Schema.define(version: 20141113033841) do
+
+  create_table "answers", force: true do |t|
+    t.integer  "question_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id"
 
   create_table "clients", force: true do |t|
     t.string   "email"
@@ -35,9 +46,9 @@ ActiveRecord::Schema.define(version: 20141030053841) do
     t.text     "content"
     t.integer  "sender_id"
     t.integer  "receiver_id"
+    t.boolean  "read"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "read"
   end
 
   create_table "profiles", force: true do |t|
@@ -63,13 +74,22 @@ ActiveRecord::Schema.define(version: 20141030053841) do
     t.text     "description"
     t.date     "due_date"
     t.string   "programme_status"
+    t.integer  "client"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "client"
   end
 
   add_index "programmes", ["user_id"], name: "index_programmes_on_user_id"
+
+  create_table "questions", force: true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id"
 
   create_table "relationships", force: true do |t|
     t.integer  "trainer_id"
@@ -93,6 +113,7 @@ ActiveRecord::Schema.define(version: 20141030053841) do
 
   create_table "specs", force: true do |t|
     t.time     "time"
+    t.integer  "weight"
     t.integer  "set"
     t.integer  "rep"
     t.string   "tempo"
@@ -100,7 +121,6 @@ ActiveRecord::Schema.define(version: 20141030053841) do
     t.integer  "exercise_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "weight"
     t.integer  "weight_cl"
     t.integer  "set_cl"
     t.integer  "rep_cl"

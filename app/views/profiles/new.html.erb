@@ -1,5 +1,9 @@
-<h1>Hi!</h1>
-<h2>Please fill in your profile to get started</h2>
 
-<%= render 'form' %>
+<% if current_user.profile.blank? %>
+	<h1>Hi!</h1>
+	<h2>Please fill in your profile to get started</h2>
+	<%= render 'form' %>
+<% else %>
+	<% redirect_to :back %>
+<% end %>
 

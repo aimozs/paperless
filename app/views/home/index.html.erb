@@ -1,4 +1,22 @@
-<% if !user_signed_in? %>
+<% if user_signed_in? %>
+	
+	<% if current_user.has_role? :client %>
+		<div class="panel panel-default">
+		  <div class="panel-heading text-center"><h3><%= @programme.description %></h3></div>
+		  <div class="panel-body">
+		  <p class="text-center">
+		    <%= link_to 'Start!', @programme, class: 'btn btn-success' %>
+		    </p>
+		  </div>
+		</div>
+
+		<div class="text-center">
+			<h4><%= link_to 'All programmes', programmes_path %></h4>
+		</div>
+	<% end %>
+
+<% else %>
+
 	<div class="row">
 
 		<div class="col-md-6 col-xs-12">
@@ -14,33 +32,12 @@
 	<div class="row">
 		<div class="col-md-6">
 			<ul class="h4">
-				<li>You have a dedicated PT making programs that fits you.</li>
-				<li>You can follow the next programme anytime, no need to wait for your PT to be available.</li>
+				<li>Personal training without the mountains of paperwork.</li>
+				<li>Train your clients from anywhere at anytime.</li>
 				<li>Easy to use, no need to install another app.</li>
 			</ul>
 		</div>
 	</div>
-
-<% else %>
-	<% if current_user.has_role? :client %>
-		<div class="panel panel-default">
-		  <div class="panel-heading text-center"><h3><%= @programme.description %></h3></div>
-		  <div class="panel-body">
-		  <p class="text-center">
-		    <%= link_to 'Start!', @programme, class: 'btn btn-success' %>
-		    </p>
-		  </div>
-		</div>
-
-		<div class="text-center">
-			<h4><%= link_to 'All programmes', programmes_path %></h4>
-		</div>
-	<% else %>
-	<div class="text-center">
-		<h4><%= link_to 'Create programme', new_programme_path, class: 'btn btn-success' %></h4>
-		<h4><%= link_to 'All programmes', programmes_path, class: 'btn btn-primary' %></h4>
-	</div>
-	<% end %>
 
 
 <% end %>

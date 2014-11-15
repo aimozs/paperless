@@ -1,0 +1,7 @@
+<h1>Please answer these question from your PT:</h1>
+<ol>
+    <% @questions.each do |question| %>
+        <li><%= question.content %></li>
+    <% end %>
+</ol>
+<br>

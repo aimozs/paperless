@@ -6,13 +6,13 @@ class ExercisesController < ApplicationController
   def index
 
     if params[:search]
-    @search = Exercise.search do
-      fulltext params[:search]
+      @search = Exercise.search do
+        fulltext params[:search]
+      end
+      @exercises = @search.results
+    else
+      @exercises = Exercise.where('user_id = ?', current_user)
     end
-    @exercises = @search.results
-   else
-    @exercises = Exercise.where('user_id = ?', current_user)
-   end
     
   end
 

@@ -16,8 +16,6 @@ class User < ActiveRecord::Base
 	has_many :reverse_relationships, foreign_key: "client_id", class_name: "Relationship", dependent: :destroy
 	has_many :trainers, through: :reverse_relationships
 
-
-
   def set_default_role
     if Client.find_by(email: email)
       self.add_role :client
@@ -41,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def my_trainer
-    reverse_relationships.first.trainer.profile
+    reverse_relationships.first.trainer
   end
 
 end
