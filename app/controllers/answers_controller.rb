@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
   def create
     @answer = Answer.new(answer_params)
     @answer.user = current_user
-    # @answer.question = params[:question] --something like this to set the relationship between the answer and it's question
+    @answer.question_id = params[:question_id]
     @answer.save
     respond_with(@answer, :location => profile_path(current_user.profile))
   end

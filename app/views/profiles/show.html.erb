@@ -69,9 +69,11 @@
             <li>
                 <%= q.content %>
                 <% if !q.answers.where(user: @profile.user).any? %> <!-- if this profile's user hasn't answered this question, display 'unanswered' -->
-                  <i><%= link_to 'Click to answer', new_answer_path(:question => q) %></i>
+                  <i><%= link_to 'Click to answer', new_answer_path(:question_id => q) %></i>
                 <% else %>
-                  <i><%= q.answers.where(user: @profile.user).content %></i>
+                  <% @answers.where(question: q).each do |ans| %>
+                    <i><%= ans.content %></i>
+                  <% end %>
                 <% end %>
             </li>
           <% end %>
@@ -131,7 +133,9 @@
                 <% if !q.answers.where(user: @profile.user).any? %> <!-- if this user hasn't answered this question, display 'unanswered' -->
                   <i>Unanswered</i>
                 <% else %>
-                  <i><%= q.answers.where(user: @profile.user).content %></i>
+                  <% @answers.where(question: q).each do |ans| %>
+                    <i><%= ans.content %></i>
+                  <% end %>
                 <% end %>
             </li>
           <% end %>

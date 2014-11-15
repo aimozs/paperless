@@ -21,6 +21,10 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def get_answer(question)
+    @answer.where(question: question)
+  end
+
   # GET /profiles/new
   def new
     @profile = Profile.new
@@ -98,6 +102,7 @@ class ProfilesController < ApplicationController
     def set_profile
       @profile = Profile.find(params[:id])
       @questions = Question.where(user: current_user)
+      @answers = Answer.where(user: @profile.user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

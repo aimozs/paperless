@@ -1,21 +1,14 @@
 <% if user_signed_in? %>
 	
-	<% if current_user.has_role? :client && @programme %>
-		<div class="panel panel-default">
-		  <div class="panel-heading text-center"><h3><%= @programme.description %></h3></div>
-		  <div class="panel-body">
-		  <p class="text-center">
-		    <%= link_to 'Start!', @programme, class: 'btn btn-success' %>
-		    </p>
-		  </div>
+	<div class="row">
+		<div class="col-md-6">
+			<ul class="h4">
+				<li>Personal training without the mountains of paperwork.</li>
+				<li>Train your clients from anywhere at anytime.</li>
+				<li>Easy to use, no need to install another app.</li>
+			</ul>
 		</div>
-
-		<div class="text-center">
-			<h4><%= link_to 'All programmes', programmes_path %></h4>
-		</div>
-	<% else %>
-		Your trainer has not set you any programmes yet.
-	<% end %>
+	</div>
 
 <% else %>
 
