@@ -19,6 +19,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 border: none !important;
 }
 
+.navbutton {
+	display: none;
+}
+
+.navbutton-desktop{
+	width: 8em;
+	margin-left: .5em;
+	margin-right: .5em;
+	display: inline-block;
+}
 
 #nummess{
 color: white !important;
@@ -186,6 +196,16 @@ margin: 1em;
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
 
+.navbutton {
+	width: 4em;
+	margin-left: .5em;
+	margin-right: .5em;
+	display: inline-block;
+}
+
+.navbutton-desktop{
+	display: none;
+}
 
 
 }

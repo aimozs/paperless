@@ -1,96 +1,32 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<div class="col-md-6">
-<% if current_user.has_role? :client %>
-  <div class="highlight">
-    <% if current_user.has_trainer?  && (current_user.has_role? :client) %>
-      Your trainer is: <%= current_user.my_trainer.profile.first_name + ' ' + current_user.my_trainer.profile.last_name %><% @rel.each do |rel| %><!--#link_to 'Fire', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' -- this could cause issues, because a client without a trainer can't do anything and must be able to be enrolled by another trainer -- they'll have to delete their profile completely for this to work properly --><% end %>
-    <% elsif current_user.has_role? :client %>
-      You currently don't have a trainer.
-    <% end %>
-  </div>
-<% end %>
-
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
-
-
-<p>
-  <strong>Email:</strong>
-  <%= @profile.user.email %>
-</p>
-<% if current_user.has_role? :client %>
-  <p>
-    <strong>Gender:</strong>
-    <%= @profile.gender %>
-  </p>
-  <p>
-    <strong>Dob:</strong>
-    <%= @profile.dob %>
-  </p>
-
-  <p>
-    <strong>Height:</strong>
-    <%= @profile.height %>
-  </p>
-
-  <p>
-    <strong>Weight:</strong>
-    <%= @profile.weight %>
-  </p>
-  <p>
-    <strong>Bodyfat:</strong>
-    <%= @profile.bodyfat %>
-  </p>
-  <p>
-    <strong>Injuries:</strong>
-    <%= @profile.injuries %>
-  </p>
-  
-  <% if current_user.has_trainer? && (current_user.has_role? :client) %>
-    <p>
-      <strong>Engagement agreement:</strong>
-      <%= current_user.my_trainer.profile.engagement.html_safe %>
-    </p>
-    <p>
-      <strong>Induction questions:</strong>
-        <ol>
-          <% @questions.where(user: @profile.user.my_trainer).each do |q| %><!-- display the questions that were made by this profile's user's trainer -->
-            <li>
-                <%= q.content %>
-                <% if !q.answers.where(user: @profile.user).any? %> <!-- if this profile's user hasn't answered this question, display 'unanswered' -->
-                  <i><%= link_to 'Click to answer', new_answer_path(:question_id => q) %></i>
-                <% else %>
-                  <% @answers.where(question: q).each do |ans| %>
-                    <i><%= ans.content %></i> <%= link_to 'change answer', answers_path, class: 'btn btn-warning' %>
-                  <% end %>
-                <% end %>
-            </li>
-          <% end %>
-      </ol>
-    </p>
+<div class="col-md-5">
+  <% if current_user.has_role? :client %>
+    <div class="highlight">
+      <% if current_user.has_trainer?  && (current_user.has_role? :client) %>
+        Your trainer is: <%= current_user.my_trainer.profile.first_name + ' ' + current_user.my_trainer.profile.last_name %><% @rel.each do |rel| %><!--#link_to 'Fire', rel, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' -- this could cause issues, because a client without a trainer can't do anything and must be able to be enrolled by another trainer -- they'll have to delete their profile completely for this to work properly --><% end %>
+      <% elsif current_user.has_role? :client %>
+        You currently don't have a trainer.
+      <% end %>
+    </div>
   <% end %>
 
-<% elsif current_user.has_role? :trainer %> <!-- if it's a trainer viewing a profile -->
-  <% if @profile.user == current_user %> <!-- and they're viewing their own profile -->
-    <p>
-      <strong>Engagement agreement:</strong>
-      <%= @profile.engagement.html_safe %>
-    </p>
-    <ol>
-      These are your induction questions:
-        <% @questions.each do |q| %>
-          <li><%= q.content %></li>
-        <% end %>
-    </ol>
-  <% else %><!-- otherwise they must be viewing a client's profile -->
+  <p>
+    <strong>First name:</strong>
+    <%= @profile.first_name %>
+  </p>
+
+  <p>
+    <strong>Last name:</strong>
+    <%= @profile.last_name %>
+  </p>
+
+
+  <p>
+    <strong>Email:</strong>
+    <%= @profile.user.email %>
+  </p>
+  <% if current_user.has_role? :client %>
     <p>
       <strong>Gender:</strong>
       <%= @profile.gender %>
@@ -117,32 +53,147 @@
       <strong>Injuries:</strong>
       <%= @profile.injuries %>
     </p>
-    <p>
-      <strong>Agreed to engagement?</strong>
-      <%= @profile.agreed %>
-    </p>
-    <p>
-      <strong>Induction answers:</strong>
-      <ol>
-          <% @questions.each do |q| %>
-            <li>
-                <%= q.content %>
-                <% if !q.answers.where(user: @profile.user).any? %> <!-- if this user hasn't answered this question, display 'unanswered' -->
-                  <i>Unanswered</i>
-                <% else %>
-                  <% @answers.where(question: q).each do |ans| %>
-                    <i><%= ans.content %></i>
+    
+    <% if current_user.has_trainer? && (current_user.has_role? :client) %>
+      <p>
+        <strong>Engagement agreement:</strong>
+        <%= current_user.my_trainer.profile.engagement.html_safe %>
+      </p>
+      <p>
+        <strong>Induction questions:</strong>
+          <ol>
+            <% @questions.where(user: @profile.user.my_trainer).each do |q| %><!-- display the questions that were made by this profile's user's trainer -->
+              <li>
+                  <%= q.content %>
+                  <% if !q.answers.where(user: @profile.user).any? %> <!-- if this profile's user hasn't answered this question, display 'unanswered' -->
+                    <i><%= link_to 'Click to answer', new_answer_path(:question_id => q) %></i>
+                  <% else %>
+                    <% @answers.where(question: q).each do |ans| %>
+                      <i><%= ans.content %></i> <%= link_to 'change answer', answers_path, class: 'btn btn-warning' %>
+                    <% end %>
                   <% end %>
-                <% end %>
-            </li>
+              </li>
+            <% end %>
+        </ol>
+      </p>
+    <% end %>
+
+  <% elsif current_user.has_role? :trainer %> <!-- if it's a trainer viewing a profile -->
+    <% if @profile.user == current_user %> <!-- and they're viewing their own profile -->
+      <p>
+        <strong>Engagement agreement:</strong>
+        <%= @profile.engagement.html_safe %>
+      </p>
+      <ol>
+        These are your induction questions:
+          <% @questions.each do |q| %>
+            <li><%= q.content %></li>
           <% end %>
       </ol>
-    </p>
-  <% end %>
-<% end %>
+    <% else %><!-- otherwise they must be viewing a client's profile -->
+      <p>
+        <strong>Gender:</strong>
+        <%= @profile.gender %>
+      </p>
+      <p>
+        <strong>Dob:</strong>
+        <%= @profile.dob %>
+      </p>
 
+      <p>
+        <strong>Height:</strong>
+        <%= @profile.height %>
+      </p>
+
+      <p>
+        <strong>Weight:</strong>
+        <%= @profile.weight %>
+      </p>
+      <p>
+        <strong>Bodyfat:</strong>
+        <%= @profile.bodyfat %>
+      </p>
+      <p>
+        <strong>Injuries:</strong>
+        <%= @profile.injuries %>
+      </p>
+      <p>
+        <strong>Agreed to engagement?</strong>
+        <% if @profile.agreed %>
+        Yes
+        <% else %>
+        Not yet
+        <% end %>
+      </p>
+      <p>
+        <strong>Induction answers:</strong>
+        <ol>
+            <% @questions.each do |q| %>
+              <li>
+                  <%= q.content %>
+                  <% if !q.answers.where(user: @profile.user).any? %> <!-- if this user hasn't answered this question, display 'unanswered' -->
+                    <i>Unanswered</i>
+                  <% else %>
+                    <% @answers.where(question: q).each do |ans| %>
+                      <i><%= ans.content %></i>
+                    <% end %>
+                  <% end %>
+              </li>
+            <% end %>
+        </ol>
+      </p>
+    <% end %>
+  <% end %>
 </div>
 
+<div class="col-md-7">
+  <strong>Meal plan</strong>
+  <% if current_user.has_role? :trainer and (current_user.id != @profile.user.id) %>
+  <!-- if the user is a trainer looking at another user's profile -->
+  <table class="table">
+      <tr>
+        <th>meal</th>
+        <% @days_of_the_week.each do |d| %>
+          <th><%= d %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <td>Breakfast<br>Lunch<br>Dinner<br>Snack<br></td>
+        <% @days_of_the_week.each do |d| %>
+          <% if @meal_days.where('day = ? AND user_id = ?', d, @profile.user).any? %>
+            <td>
+              <% if @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.breakfast.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.lunch.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.dinner.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.snack.blank? %>
+                <%= link_to 'incomplete', edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %>
+              <% else %>
+                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.breakfast, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.lunch, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.dinner, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.snack, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+              <% end %>
+            </td>
+          <% else %>
+            <td>
+              <%= link_to 'add meals', new_meal_day_path(day: d, client: @profile.user), class: 'btn btn-info' %></td>
+          <% end %>
+        <% end %>
+      </tr>
+  </table>
+
+  <% elsif current_user.has_role? :client %>
+  <!-- if the user is a client they must be looking at their own profile -->
+    Show meal plan.
+    Button to journal meals.
+  <% end %>
+
+  <% if @profile == current_user.profile %>
+    <% if current_user.has_role? :trainer %>
+       <%= link_to 'Edit your induction questions', questions_path, class:'btn btn-default' %>
+    <% end %>
+    <%= link_to 'Edit your profile', edit_profile_path(@profile), class:'btn btn-default' %>
+    <!-- button that let a user sign out -->
+    <%= link_to 'Sign out' , destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+  <% end %>
+</div>
 
 
 
@@ -157,11 +208,3 @@
 </p>
 <% end %>
 
-<% if @profile == current_user.profile %>
-  <% if current_user.has_role? :trainer %>
-    <%= link_to 'Edit your induction questions', questions_path, class:'btn btn-default' %>
-  <% end %>
-  <%= link_to 'Edit your profile', edit_profile_path(@profile), class:'btn btn-default' %>
-  <!-- button that let a user sign out -->
-  <%= link_to 'Sign out' , destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-<% end %>

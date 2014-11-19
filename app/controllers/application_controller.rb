@@ -24,9 +24,12 @@ class ApplicationController < ActionController::Base
 			if current_user.has_trainer? && current_user.profile.agreed?
 				# go to the list of their programmes
 	 			programmes_path(current_user.profile)
-	 		else
-	 			# edit their profile, so that they can agree to the engagement agreement
+	 		elsif current_user.has_role? :client
+	 			# edit their profile if they're a client, so that they can agree to the engagement agreement
 	 			edit_profile_path(current_user.profile)
+	 		else
+	 			# view their clients if they're a trainer
+	 			profiles_path
 	 		end
 	 	else
 	 		# if they don't have a profile, get them to set up a new profile

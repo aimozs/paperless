@@ -1,0 +1,23 @@
+<h1>Add the meals for <%= (params[:day]) %></h1>
+<%= simple_form_for(@meal_day, url: meal_days_path(client: params[:client], day: params[:day])) do |f| %>
+<%= f.error_notification %>
+  	<div class="form-group">
+    	<%= f.input :breakfast, input_html: { class: 'form-control' } %>
+  	</div>
+  	<div class="form-group">
+    	<%= f.input :lunch, input_html: { class: 'form-control' } %>
+  	</div>
+  	<div class="form-group">
+    	<%= f.input :dinner, input_html: { class: 'form-control' } %>
+  	</div>
+  	<div class="form-group">
+    	<%= f.input :snack, input_html: { class: 'form-control' } %>
+  	</div>
+
+  <div class="form-group">
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', :back %>

@@ -18,26 +18,31 @@
     <!-- navbar displaying full menu if screen is big, or icons if mobile -->
       <% if user_signed_in? && current_user.profile %>
       <div class="row menu-top">
-        <div class="col-xs-2 hidden-xs hidden-sm navbar-brand"><%= link_to 'Paperless.PT', root_path %></div>
-        <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', root_path, class: 'fa fa-home btn btn-default' %></div>
+        <div class="navbutton-desktop"><%= link_to 'Paperless.PT', root_path %></div>
+        <div class="navbutton"><%= link_to ' ', root_path, class: 'fa fa-home btn btn-default' %></div>
+
         <% if current_user.has_role? :trainer %>
-          <div class="col-xs-2 hidden-xs hidden-sm"><%= link_to ' Clients', profiles_path, class: 'fa fa-male btn btn-default' %></div>
-          <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', profiles_path, class: 'fa fa-male btn btn-default' %></div>
-
-
-          <div class="col-xs-2 hidden-xs hidden-sm"><%= link_to ' Exercises', exercises_path, class: 'fa fa-heart btn btn-default' %></div>
-          <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', exercises_path, class: 'fa fa-heart btn btn-default' %></div>
+          <div class="navbutton-desktop"><%= link_to ' Clients', profiles_path, class: 'fa fa-male btn btn-default' %></div>
+          <div class="navbutton"><%= link_to ' ', profiles_path, class: 'fa fa-male btn btn-default' %></div>
+          <div class="navbutton-desktop"><%= link_to ' Exercises', exercises_path, class: 'fa fa-heart btn btn-default' %></div>
+          <div class="navbutton"><%= link_to ' ', exercises_path, class: 'fa fa-heart btn btn-default' %></div>
         <% end %>
 
-        <div class="col-xs-2 hidden-xs hidden-sm"><%= link_to ' Programmes', programmes_path, class: 'fa fa-list-ul btn btn-default' %></div>
-        <div class="col-xs-2 hidden-md hidden-lg"><%= link_to ' ', programmes_path, class: 'fa fa-list-ul btn btn-default' %></div>
-        <div class="col-xs-2 hidden-xs hidden-sm"><%= link_to (" Messages <span id='nummess'>#{@nummess}</span>").html_safe, messages_path, class: 'fa fa-envelope btn btn-default' %></div>
-        <div class="col-xs-2 hidden-md hidden-lg"><a class="glyphicon glyphicon-envelope btn btn-default" href="<%= messages_path %>"><span id="nummess"><%= @nummess %></span></a></div>
+        <% if current_user.has_role? :client %>
+          <div class="navbutton-desktop"><a class="fa fa-cutlery btn btn-default" href="<%= meal_plans_path %>"> Meals</a></div>
+          <div class="navbutton"><a class="fa fa-cutlery btn btn-default" href="<%= meal_plans_path %>"> </a></div>
+        <% end %>
+
+        <div class="navbutton-desktop"><%= link_to ' Programmes', programmes_path, class: 'fa fa-list-ul btn btn-default' %></div>
+        <div class="navbutton"><%= link_to ' ', programmes_path, class: 'fa fa-list-ul btn btn-default' %></div>
+        
+        <div class="navbutton-desktop"><%= link_to (" Messages <span id='nummess'>#{@nummess}</span>").html_safe, messages_path, class: 'fa fa-envelope btn btn-default' %></div>
+        <div class="navbutton"><a class="glyphicon glyphicon-envelope btn btn-default" href="<%= messages_path %>"><span id="nummess"><%= @nummess %></span></a></div>
 
 
         <% if current_user.profile %>
-          <div class="col-xs-2 hidden-xs hidden-sm"><a class="fa fa-user btn btn-default" href="<%= profile_path(current_user.profile) %>"> MyProfile</a></div>
-          <div class="col-xs-2 hidden-md hidden-lg"><a class="fa fa-user btn btn-default" href="<%= profile_path(current_user.profile) %>"> </a></div>
+          <div class="navbutton-desktop"><a class="fa fa-user btn btn-default" href="<%= profile_path(current_user.profile) %>"> MyProfile</a></div>
+          <div class="navbutton"><a class="fa fa-user btn btn-default" href="<%= profile_path(current_user.profile) %>"> </a></div>
         <% end %>
       </div>
     <% else %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115125149) do
+ActiveRecord::Schema.define(version: 20141119043046) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -44,6 +44,31 @@ ActiveRecord::Schema.define(version: 20141115125149) do
   end
 
   add_index "exercises", ["user_id"], name: "index_exercises_on_user_id"
+
+  create_table "meal_days", force: true do |t|
+    t.string   "day"
+    t.date     "date"
+    t.string   "breakfast"
+    t.string   "lunch"
+    t.string   "dinner"
+    t.string   "snack"
+    t.integer  "meal_plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "meal_days", ["meal_plan_id"], name: "index_meal_days_on_meal_plan_id"
+  add_index "meal_days", ["user_id"], name: "index_meal_days_on_user_id"
+
+  create_table "meal_plans", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "meal_plans", ["user_id"], name: "index_meal_plans_on_user_id"
 
   create_table "messages", force: true do |t|
     t.text     "content"

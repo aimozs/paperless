@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @meal_day.day %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @meal_day.date %>
+</p>
+
+<p>
+  <strong>Breakfast:</strong>
+  <%= @meal_day.breakfast %>
+</p>
+
+<p>
+  <strong>Lunch:</strong>
+  <%= @meal_day.lunch %>
+</p>
+
+<p>
+  <strong>Dinner:</strong>
+  <%= @meal_day.dinner %>
+</p>
+
+<p>
+  <strong>Snack:</strong>
+  <%= @meal_day.snack %>
+</p>
+
+<p>
+  <strong>Meal plan:</strong>
+  <%= @meal_day.meal_plan %>
+</p>
+
+<%= link_to 'Edit', edit_meal_day_path(@meal_day) %> |
+<%= link_to 'Back', meal_days_path %>

@@ -19,6 +19,8 @@ class ProfilesController < ApplicationController
     elsif current_user.has_role? :client
       @questions = Question.where(user: current_user.my_trainer)
     end
+    @meal_days = MealDay.where(user: @profile.user)
+    @days_of_the_week = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
   end
 
   def get_answer(question)
