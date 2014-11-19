@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113033841) do
+ActiveRecord::Schema.define(version: 20141115125149) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -40,7 +40,10 @@ ActiveRecord::Schema.define(version: 20141113033841) do
     t.string   "video"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "exercises", ["user_id"], name: "index_exercises_on_user_id"
 
   create_table "messages", force: true do |t|
     t.text     "content"

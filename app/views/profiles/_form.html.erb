@@ -8,9 +8,6 @@
   	<div class="form-group">
     	<%= f.input :last_name, input_html: { class: 'form-control' } %>
   	</div>
-  	<div class="form-group">
-    	<%= f.input :social, input_html: { class: 'form-control' } %>
-  	</div>
   <% if current_user.has_role? :client %>
     <div class="form-group">
       <%= f.input :gender, input_html: { class: 'form-control' } %>
@@ -45,7 +42,7 @@
   <div class="col-md-6">
   <% elsif current_user.has_role? :trainer %>
       <div class="form-group">
-        <%= f.input :engagement, input_html: { class: 'form-control' } %>
+        <%= f.input :engagement, input_html: { class: 'form-control ckeditor', rows: 20 } %>
         This is the agreement that your clients will agree to when you enroll them.
       </div>
   <% end %>
@@ -56,3 +53,9 @@
     </div>
   </div>
 <% end %>
+
+<style>
+$('.ckeditor').ckeditor({ 
+    //  optional  config  
+});
+</style>

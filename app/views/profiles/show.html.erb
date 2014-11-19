@@ -20,10 +20,7 @@
   <strong>Last name:</strong>
   <%= @profile.last_name %>
 </p>
-<p>
-  <strong>Social:</strong>
-  <%= @profile.social %>
-</p>
+
 
 <p>
   <strong>Email:</strong>
@@ -60,7 +57,7 @@
   <% if current_user.has_trainer? && (current_user.has_role? :client) %>
     <p>
       <strong>Engagement agreement:</strong>
-      <%= current_user.my_trainer.profile.engagement %>
+      <%= current_user.my_trainer.profile.engagement.html_safe %>
     </p>
     <p>
       <strong>Induction questions:</strong>
@@ -85,7 +82,7 @@
   <% if @profile.user == current_user %> <!-- and they're viewing their own profile -->
     <p>
       <strong>Engagement agreement:</strong>
-      <%= @profile.engagement %>
+      <%= @profile.engagement.html_safe %>
     </p>
     <ol>
       These are your induction questions:
