@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :meal_journals
+
   resources :meal_days
 
   resources :answers

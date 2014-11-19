@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119043046) do
+ActiveRecord::Schema.define(version: 20141119150400) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -60,6 +60,20 @@ ActiveRecord::Schema.define(version: 20141119043046) do
 
   add_index "meal_days", ["meal_plan_id"], name: "index_meal_days_on_meal_plan_id"
   add_index "meal_days", ["user_id"], name: "index_meal_days_on_user_id"
+
+  create_table "meal_journals", force: true do |t|
+    t.integer  "meal_day_id"
+    t.date     "date"
+    t.string   "meal"
+    t.string   "ate"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "day"
+  end
+
+  add_index "meal_journals", ["meal_day_id"], name: "index_meal_journals_on_meal_day_id"
+  add_index "meal_journals", ["user_id"], name: "index_meal_journals_on_user_id"
 
   create_table "meal_plans", force: true do |t|
     t.integer  "user_id"

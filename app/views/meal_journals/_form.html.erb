@@ -1,0 +1,17 @@
+<%= simple_form_for(@meal_journal) do |f| %>
+  <%= f.error_notification %>
+
+  	<div class="form-group">
+    	<%= f.input :date, input_html: { class: 'form-control' } %>
+  	</div>
+  	<div class="form-group">
+    	<%= f.input :meal, collection: ['breakfast', 'lunch', 'dinner', 'snack'], input_html: { class: 'form-control' } %>
+  	</div>
+  	<div class="form-group">
+    	<%= f.input :ate, input_html: { class: 'form-control' } %>
+  	</div>
+
+  <div class="form-group">
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

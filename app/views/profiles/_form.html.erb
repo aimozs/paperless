@@ -29,7 +29,7 @@
     </div>
     <% if current_user.has_trainer? && (current_user.has_role? :client) %>
       <strong>Engagement agreement:</strong>
-      <%= current_user.my_trainer.profile.engagement %>
+      <%= current_user.my_trainer.profile.engagement.html_safe %>
       <div class="form-group">
         <%= f.input :agreed, input_html: { class: 'form-control' } %>
       </div><br><br>

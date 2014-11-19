@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :programmes
   has_many :exercises
   has_many :meal_days
+  has_many :meal_journals
   
   has_many :relationships, foreign_key: "trainer_id", dependent: :destroy
 	has_many :clients, through: :relationships

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meal day:</strong>
+  <%= @meal_journal.day %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @meal_journal.date %>
+</p>
+
+<p>
+  <strong>Meal:</strong>
+  <%= @meal_journal.meal %>
+</p>
+
+<p>
+  <strong>Ate:</strong>
+  <%= @meal_journal.ate %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @meal_journal.user %>
+</p>
+
+<%= link_to 'Edit', edit_meal_journal_path(@meal_journal) %> |
+<%= link_to 'Back', meal_journals_path %>

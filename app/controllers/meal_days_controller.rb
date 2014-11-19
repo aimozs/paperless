@@ -4,7 +4,8 @@ class MealDaysController < ApplicationController
   respond_to :xml, :json, :html
   
   def index
-    @meal_days = MealDay.all
+    @meal_days = MealDay.where(user_id: current_user.id)
+    @meal_journals = MealJournal.where(user_id: current_user.id)
     respond_with(@meal_days)
   end
 

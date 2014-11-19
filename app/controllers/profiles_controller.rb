@@ -21,6 +21,7 @@ class ProfilesController < ApplicationController
     end
     @meal_days = MealDay.where(user: @profile.user)
     @days_of_the_week = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+    @meal_journals = MealJournal.where(user: @profile.user)
   end
 
   def get_answer(question)

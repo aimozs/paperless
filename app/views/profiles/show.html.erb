@@ -147,42 +147,60 @@
 </div>
 
 <div class="col-md-7">
-  <strong>Meal plan</strong>
+  
   <% if current_user.has_role? :trainer and (current_user.id != @profile.user.id) %>
   <!-- if the user is a trainer looking at another user's profile -->
-  <table class="table">
-      <tr>
-        <th>meal</th>
-        <% @days_of_the_week.each do |d| %>
-          <th><%= d %></th>
-        <% end %>
-      </tr>
-      <tr>
-        <td>Breakfast<br>Lunch<br>Dinner<br>Snack<br></td>
-        <% @days_of_the_week.each do |d| %>
-          <% if @meal_days.where('day = ? AND user_id = ?', d, @profile.user).any? %>
-            <td>
-              <% if @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.breakfast.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.lunch.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.dinner.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.snack.blank? %>
-                <%= link_to 'incomplete', edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %>
-              <% else %>
-                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.breakfast, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
-                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.lunch, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
-                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.dinner, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
-                <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.snack, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
-              <% end %>
-            </td>
-          <% else %>
-            <td>
-              <%= link_to 'add meals', new_meal_day_path(day: d, client: @profile.user), class: 'btn btn-info' %></td>
+    <strong>Meal plan</strong>
+    <table class="table">
+        <tr>
+          <th>meal</th>
+          <% @days_of_the_week.each do |d| %>
+            <th><%= d %></th>
           <% end %>
-        <% end %>
-      </tr>
-  </table>
+        </tr>
+        <tr>
+          <td>Breakfast<br>Lunch<br>Dinner<br>Snack<br></td>
+          <% @days_of_the_week.each do |d| %>
+            <% if @meal_days.where('day = ? AND user_id = ?', d, @profile.user).any? %>
+              <td>
+                <% if @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.breakfast.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.lunch.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.dinner.blank? || @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.snack.blank? %>
+                  <%= link_to 'incomplete', edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %>
+                <% else %>
+                  <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.breakfast, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+                  <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.lunch, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+                  <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.dinner, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+                  <%= link_to @meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.snack, edit_meal_day_path(@meal_days.where('day = ? AND user_id = ?', d, @profile.user).first.id)  %><br>
+                <% end %>
+              </td>
+            <% else %>
+              <td>
+                <%= link_to 'add meals', new_meal_day_path(day: d, client: @profile.user), class: 'btn btn-info' %></td>
+            <% end %>
+          <% end %>
+        </tr>
+    </table>
+    <% if @meal_journals.any? %>
+    <strong>Client's meal journal</strong>
+     <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Meal</th>
+            <th>Ate</th>
+          </tr>
+        </thead>
 
-  <% elsif current_user.has_role? :client %>
-  <!-- if the user is a client they must be looking at their own profile -->
-    Show meal plan.
-    Button to journal meals.
+        <tbody>
+          <% @meal_journals.each do |meal_journal| %>
+            <tr>
+              <td><%= meal_journal.date %></td>
+              <td><%= meal_journal.meal %></td>
+              <td><%= meal_journal.ate %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   <% end %>
 
   <% if @profile == current_user.profile %>

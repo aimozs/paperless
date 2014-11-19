@@ -29,8 +29,8 @@
         <% end %>
 
         <% if current_user.has_role? :client %>
-          <div class="navbutton-desktop"><a class="fa fa-cutlery btn btn-default" href="<%= meal_plans_path %>"> Meals</a></div>
-          <div class="navbutton"><a class="fa fa-cutlery btn btn-default" href="<%= meal_plans_path %>"> </a></div>
+          <div class="navbutton-desktop"><a class="fa fa-cutlery btn btn-default" href="<%= meal_days_path %>"> Meals</a></div>
+          <div class="navbutton"><a class="fa fa-cutlery btn btn-default" href="<%= meal_days_path %>"> </a></div>
         <% end %>
 
         <div class="navbutton-desktop"><%= link_to ' Programmes', programmes_path, class: 'fa fa-list-ul btn btn-default' %></div>
