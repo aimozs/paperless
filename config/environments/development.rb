@@ -38,10 +38,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.default_url_options = { :host => 'localhost:3000'}
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    user_name:            'matt@thecoderfactory.com',
-    password:             'lxczhwlxczhw5',
+    address:              'smtpout.asia.secureserver.net',
+    port:                 465,
+    user_name:            'info@paperlesspt.co',
+    password:             'NANA20134',
     authentication:       'plain',
     enable_starttls_auto: true
   }

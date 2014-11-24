@@ -75,15 +75,6 @@ ActiveRecord::Schema.define(version: 20141119150400) do
   add_index "meal_journals", ["meal_day_id"], name: "index_meal_journals_on_meal_day_id"
   add_index "meal_journals", ["user_id"], name: "index_meal_journals_on_user_id"
 
-  create_table "meal_plans", force: true do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "meal_plans", ["user_id"], name: "index_meal_plans_on_user_id"
-
   create_table "messages", force: true do |t|
     t.text     "content"
     t.integer  "sender_id"
