@@ -83,11 +83,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.assets.raise_runtime_errors = true
-  config.action_mailer.default_url_options = { :host => 'paperlesspt.herokuapp.com' }
-  config.default_url_options = { :host => 'paperlesspt.herokuapp.com'}
+  config.action_mailer.default_url_options = { :host => 'www.paperlesspt.co' }
+  config.default_url_options = { :host => 'www.paperlesspt.co'}
   config.action_mailer.smtp_settings = {
     address:              'smtpout.asia.secureserver.net',
-    port:                 3535,
+    port:                 80,
     user_name:            'info@paperlesspt.co',
     password:             'NANA20134',
     authentication:       'plain',
