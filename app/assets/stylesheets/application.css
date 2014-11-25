@@ -3,6 +3,11 @@
 	font-weight: 200;
 }
 
+a > img {
+	height: 3em;
+	width: auto;
+}
+
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th{
 	background-color: #0f6666 !important;
 }
@@ -191,10 +196,9 @@ margin: 1em;
 	border-radius: 1em !important;
 }
 
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 480px) {
+/* Small screens (portrait and landscape) ----------- */
+@media only screen  
+and (max-width : 480px)  {
 
 .navbutton {
 	width: 4em;
@@ -207,23 +211,30 @@ and (max-device-width : 480px) {
 	display: none;
 }
 
+.container .yield {
+	margin-top: 6em;
+}
 
 }
 
-
-/* iPads (portrait and landscape) ----------- */
+/*mobile device-----*/
 @media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px)
-and (min-width : 1224px) {
+and (min-device-width : 320px) 
+and (max-width : 480px) and (max-device-width : 480px){
 
-
-
+.navbutton {
+	width: 4em;
+	margin-left: 0;
+	margin-right: 0;
+	display: inline-block;
 }
 
-/* Desktops and laptops ----------- */
-@media only screen 
-and (max-width : 1024px) {
+.navbutton-desktop{
+	display: none;
+}
 
+.container .yield {
+	margin-top: 6em;
+}
 
 }

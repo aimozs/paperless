@@ -18,7 +18,7 @@
     <!-- navbar displaying full menu if screen is big, or icons if mobile -->
       <% if user_signed_in? && current_user.profile %>
       <div class="row menu-top">
-        <div class="navbutton-desktop"><%= link_to 'Paperless.PT', root_path %></div>
+        <div class="navbutton-desktop"><%= link_to image_tag('logo.png'), root_path %></div>
         <div class="navbutton"><%= link_to ' ', root_path, class: 'fa fa-home btn btn-default' %></div>
 
         <% if current_user.has_role? :trainer %>
