@@ -24,14 +24,6 @@ module MyOPT
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
-  address:              'smtpout.asia.secureserver.net',
-  port:                 25,
-  domain:               'paperlesspt.co',
-  user_name:            'info@paperlesspt.co',
-  password:             'NANA20134',
-  authentication:       'plain',
-  enable_starttls_auto: false  }
+
   end
 end

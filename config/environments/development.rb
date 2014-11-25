@@ -39,7 +39,7 @@ Rails.application.configure do
   config.default_url_options = { :host => 'localhost:3000'}
   config.action_mailer.smtp_settings = {
     address:              'smtpout.asia.secureserver.net',
-    port:                 465,
+    port:                 3535,
     user_name:            'info@paperlesspt.co',
     password:             'NANA20134',
     authentication:       'plain',
