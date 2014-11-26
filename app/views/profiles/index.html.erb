@@ -44,7 +44,7 @@
     <tbody>
       <% @pending.each do |pending| %>
           <tr>
-            <td><%= pending.created_at %></td>
+            <td><%= pending.created_at.to_time %></td>
             <td><%= pending.email %></td>
           </tr>
       <% end %>
