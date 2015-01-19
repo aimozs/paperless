@@ -12,6 +12,7 @@ class AnswersController < ApplicationController
   end
 
   def new
+    @question = Question.where(params[:question_id])
     @answer = Answer.new
     respond_with(@answer)
   end

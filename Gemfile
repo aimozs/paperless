@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # gem 'rails-erd'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails'
 gem 'devise'
 gem 'devise_invitable', '~> 1.3.4'
 gem 'ckeditor_rails'
@@ -13,10 +13,14 @@ gem 'cancan'
 gem 'simple_form'
 gem 'nested_form'
 
+#date pciker
+gem 'bootstrap-datepicker-rails'
+
 gem 'sunspot_rails'
 group :development, :test do
 	gem 'sqlite3'
 	gem 'sunspot_solr'
+	gem "rails-erd"
 end
 gem 'therubyracer'
 

@@ -12,20 +12,12 @@
   <% end %>
 
   <p>
-    <strong>First name:</strong>
-    <%= @profile.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= @profile.last_name %>
-  </p>
-
-
-  <p>
-    <strong>Email:</strong>
+    <%= @profile.first_name.capitalize %> <%= @profile.last_name.capitalize %><br>
     <%= @profile.user.email %>
   </p>
+
+
+
   <% if current_user.has_role? :client %>
     <p>
       <strong>Gender:</strong>

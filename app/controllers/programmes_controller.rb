@@ -41,6 +41,9 @@ class ProgrammesController < ApplicationController
 
   # GET /programmes/new
   def new
+    if params[:client_id]
+      @client = User.find_by(id: params[:client_id])
+    end
     @programme = Programme.new
     @exercises = Exercise.all
     @users = User.all

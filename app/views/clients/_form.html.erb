@@ -1,12 +1,12 @@
-<h2>Enroll a client</h2>
-<p>Just fill in their e-mail address and we'll send them an invitation</p>
+Just fill in their e-mail address and we'll send them an invitation
 <%= simple_form_for(@client) do |f| %>
   <%= f.error_notification %>
   	<div class="form-group">
+  		<div class="col-md-8">
     	<%= f.input :email, input_html: { class: 'form-control' } %>
+    	</div>
+    	<div class="col-md-4">
+    	<%= f.submit 'Submit', class: 'btn btn-primary' %>
+    	</div>
   	</div>
-
-  <div class="form-group">
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
-  </div>
 <% end %>

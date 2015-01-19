@@ -1,8 +1,32 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <%= @message.content %>
-</p>
-
-
-<p class="text-left"><%= link_to 'Reply', new_message_path, class: 'btn btn-primary' %></p>
+<%= simple_form_for(@message) do |f| %>
+<%= f.error_notification %>
+<div class="panel panel-default">
+	<div class="panel-header">
+	<%= render 'form' %>
+	</div>
+	<div class="panel-body">
+		<% @messages.reverse_order.each do |message| %>
+			<% if (message.sender_id == current_user.id) %>
+				<div class="row">
+					<div class="pull-right">
+					<h4><%= message.content %></h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="pull-right">
+					<%= message.created_at.strftime('%e %b %Y') %>
+					</div>
+				</div>
+			<% elsif (message.sender_id == @receiver.id) %>
+				<div class="row">
+					<div>
+					<h4><%= message.content %></h4>
+					<%= message.created_at.strftime('%e %b %Y') %>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+<% end %>

@@ -1,56 +1,100 @@
-<% if current_user.has_role? :trainer %>
-<div class="row">
-  <div class="col-md-6" style="border: 1px solid white;">
-    <%= render 'clients/form' %>
-  </div>
-</div>
-<% end %>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" class="btn btn-success" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          List of your clients
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+      <% if @rel.any? %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>First name</th>
+              <th>Email</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
 
-<% if @rel.any? %>
-  <h1>Listing of your clients</h1>
-
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>First name</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @profiles.each do |profile| %>
-        <% if current_user.training?(profile.user) %>
-          <tr>
-            <td><%= link_to profile.first_name.capitalize, profile %></td>
-            <td><%= profile.user.email %></td>
-          </tr>
+          <tbody>
+            <% @profiles.each do |profile| %>
+              <% if current_user.training?(profile.user) %>
+                <tr>
+                  <td>
+                  
+                    <%= link_to profile.first_name.capitalize + " " + profile.last_name.capitalize, profile_path(profile) %>
+                  </td>
+                  <td><%= profile.user.email %></td>
+                  <td><%= link_to "M", message_path(@message, receiver_id: profile.user.id), class:'btn btn-info' %></td>
+                  <td><%= link_to "P", new_programme_path(client_id: profile.user.id), class:'btn btn-primary' %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+        <% else %>
+          <%= render 'clients/form' %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-
-<% if Client.find_by(trainer: current_user.id) %>
- <h1>Enrollments pending</h1>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Date sent</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @pending.each do |pending| %>
-          <tr>
-            <td><%= pending.created_at.to_time %></td>
-            <td><%= pending.email %></td>
-          </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </div>
+    </div>
+  </div>
+  <% if @rel.any? %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed btn btn-info" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Enroll a client
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <%= render 'clients/form' %>
+      </div>
+    </div>
+  </div>
   <% end %>
+  <% if Client.find_by(trainer: current_user.id) %>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed btn btn-info" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Pending enrollments
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date sent</th>
+              <th>Email</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @pending.each do |pending| %>
+                <tr>
+                  <td><%= pending.created_at.to_time.strftime('%e %b %Y') %></td>
+                  <td><%= pending.email %></td>
+                  <td><%= link_to 'X', pending, method: :delete, data: { confirm: 'Are you sure you want to cancel this enrollment?' }, class:'btn btn-danger' %></td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+
 
 
 <% if current_user.has_role? :admin %>

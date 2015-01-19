@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
     @client = Client.new
     @pending = Client.where(trainer: current_user.id)
     @rel = Relationship.where(trainer: current_user)
+    @message = Message.last
   end
 
   # GET /profiles/1

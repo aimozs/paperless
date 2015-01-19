@@ -1,14 +1,15 @@
-<h1>Your questions</h1>(These questions are given to your new clients when they enroll)<br><br>
-
+<h1>Your questions</h1>
+(These questions are given to your new clients when they enroll)
+<hr>
+	<%= render 'form' %>
+	<hr>
     <% @questions.each do |question| %>
-      
-        <%= question.content %>
-        <%= link_to 'Edit', edit_question_path(question), class: 'btn btn-warning' %>
-        <%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %><br>
-
+    	<%= question.content %>
+		<%= link_to 'Edit', edit_question_path(question), class: 'btn btn-warning' %>
+		<%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+		<br>
     <% end %>
-
-<br>
-
-<%= link_to 'New Question', new_question_path, class: 'btn btn-success' %>
+<hr>
+<div class="pull-right">
 <%= link_to 'Done!', profiles_path, class: 'btn btn-info' %>
+</div>

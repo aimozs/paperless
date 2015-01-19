@@ -4,17 +4,27 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = Message.where('receiver_id = ? OR sender_id = ?', current_user.id, current_user.id)
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @message.update_attribute('read', true)
+    # @message.update_attribute('read', true)
+    @message = Message.new
+    if params[:receiver_id]
+      
+      @receiver = User.find(params[:receiver_id])
+    end
+    @messages = Message.where('receiver_id = ? OR sender_id = ?', current_user.id, current_user.id)
   end
 
   # GET /messages/new
   def new
+    if params[:receiver_id]
+      @receiver_id = params[:receiver_id]
+      @receiver = User.find_by(id: @receiver_id)
+    end
     @message = Message.new
   end
 
@@ -31,7 +41,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to messages_path, notice: 'Message was successfully created.' }
+        format.html { redirect_to message_path(@message, receiver_id: @message.receiver_id), notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
@@ -72,6 +82,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:content, :sender_id, :receiver_id, :read)
+      params.require(:message).permit(:application_id, :job_id, :content, :sender_id, :receiver_id, :read)
     end
 end

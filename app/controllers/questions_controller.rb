@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   respond_to :xml, :json, :html
 
   def index
+    @question = Question.new
     @questions = Question.where(user: current_user)
     respond_with(@questions)
   end
